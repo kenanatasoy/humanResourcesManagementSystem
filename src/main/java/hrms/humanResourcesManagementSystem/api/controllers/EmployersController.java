@@ -4,14 +4,17 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import hrms.humanResourcesManagementSystem.business.abstracts.EmployerService;
+import hrms.humanResourcesManagementSystem.core.utilities.DataResult;
+import hrms.humanResourcesManagementSystem.core.utilities.Result;
 import hrms.humanResourcesManagementSystem.entities.Employer;
 
 @RestController
-@RequestMapping("/api/users/")
+@RequestMapping("/api/employers/")
 public class EmployersController {
 
 	@Autowired
@@ -19,29 +22,39 @@ public class EmployersController {
 	
 	
 	@GetMapping("getall")
-	public List<Employer> getAll(){
+	public DataResult<List<Employer>> getAll(){
 		return this.employerService.getAll();
 	}
 	
 	@GetMapping("getbyid")
-	public Employer get(int id) {
+	public DataResult<Employer> get(int id) {
 		return this.employerService.get(id);
 	}
 	
-	@GetMapping("delete")
-	public void delete(Employer employer) {
-		this.employerService.delete(employer);
+	@PostMapping("delete")
+	public Result delete(Employer employer) {
+		return this.employerService.delete(employer);
 	}
 	
-	@GetMapping("add")
-	public void add(Employer employer) {
-		this.employerService.add(employer);
+//	@PostMapping("add")
+//	public ResponseEntity<?> add(@RequestBody Employer employer) {
+//		
+//		Result result = this.employerService.add(employer);
+//		
+//		if (result.isSuccess()) {
+//			return ResponseEntity.ok(result);
+//		}
+//		else {
+//			return ResponseEntity.badRequest().body(result);
+//		}
+//	}
+	
+	@PostMapping("update")
+	public Result update(Employer employer){
+		return this.employerService.update(employer);
 	}
 	
-	@GetMapping("update")
-	public void update(Employer employer){
-		this.employerService.update(employer);
-	}
+	
 	
 }
 

@@ -4,10 +4,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import hrms.humanResourcesManagementSystem.business.abstracts.JobTitleService;
+import hrms.humanResourcesManagementSystem.core.utilities.DataResult;
+import hrms.humanResourcesManagementSystem.core.utilities.Result;
 import hrms.humanResourcesManagementSystem.entities.JobTitle;
 
 @RestController
@@ -19,28 +22,28 @@ public class JobTitlesController {
 
 	
 	@GetMapping("getall")
-	public List<JobTitle> getAll(){
+	public DataResult<List<JobTitle>> getAll(){
 		return this.jobTitleService.getAll();
 	}
 	
 	@GetMapping("getbyid")
-	public JobTitle get(int id) {
+	public DataResult<JobTitle> get(int id) {
 		return this.jobTitleService.get(id);
 	}
 	
-	@GetMapping("delete")
-	public void delete(JobTitle jobTitle) {
-		this.jobTitleService.delete(jobTitle);
+	@PostMapping("delete")
+	public Result delete(JobTitle jobTitle) {
+		return this.jobTitleService.delete(jobTitle);
 	}
 	
-	@GetMapping("add")
-	public void add(JobTitle jobTitle) {
-		this.jobTitleService.add(jobTitle);
+	@PostMapping("add")
+	public Result add(JobTitle jobTitle) {
+		return this.jobTitleService.add(jobTitle);
 	}
 	
-	@GetMapping("update")
-	public void update(JobTitle jobTitle){
-		this.jobTitleService.update(jobTitle);
+	@PostMapping("update")
+	public Result update(JobTitle jobTitle){
+		return this.jobTitleService.update(jobTitle);
 	}
 	
 }

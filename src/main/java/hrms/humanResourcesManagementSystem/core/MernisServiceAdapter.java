@@ -3,14 +3,12 @@ package hrms.humanResourcesManagementSystem.core;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
-import java.rmi.RemoteException;
-import java.util.Locale;
 
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import hrms.humanResourcesManagementSystem.business.abstracts.UserValidationService;
+import hrms.humanResourcesManagementSystem.core.utilities.ErrorResult;
+import hrms.humanResourcesManagementSystem.core.utilities.Result;
 import hrms.humanResourcesManagementSystem.entities.JobSeeker;
 import tr.gov.nvi.tckimlik.ws.KPSPublic;
 import tr.gov.nvi.tckimlik.ws.KPSPublicSoap;
@@ -20,16 +18,17 @@ import tr.gov.nvi.tckimlik.ws.KPSPublicSoap;
 public class MernisServiceAdapter implements UserValidationService<JobSeeker>{
 
 	@Override
-	public boolean validate(JobSeeker jobSeeker) {
+	public Result validate(JobSeeker jobSeeker) {
 		
 		
 		String endpoint = "https://tckimlik.nvi.gov.tr/Service/KPSPublic.asmx";
 		
 		URL url = null;
+		
 		try {
 			url = URI.create(endpoint).toURL();
 		} catch (MalformedURLException e) {
-			return false;
+			return new ErrorResult();
 		}
 		
 		KPSPublic service = new KPSPublic(url);
@@ -47,8 +46,8 @@ public class MernisServiceAdapter implements UserValidationService<JobSeeker>{
 		
 		
 		
-		return port.tcKimlikNoDogrula(nationalIdNoL, jobSeeker.getFirstName().toUpperCase(), 
-				jobSeeker.getLastName().toUpperCase(), jobSeeker.getBirthDate().getYear());
+		return new Result(port.tcKimlikNoDogrula(nationalIdNoL, jobSeeker.getFirstName().toUpperCase(), 
+				jobSeeker.getLastName().toUpperCase(), jobSeeker.getBirthDate().getYear()));
 	}
 	
 	

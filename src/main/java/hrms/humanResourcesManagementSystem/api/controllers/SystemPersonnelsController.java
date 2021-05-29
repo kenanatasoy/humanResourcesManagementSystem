@@ -3,11 +3,16 @@ package hrms.humanResourcesManagementSystem.api.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import hrms.humanResourcesManagementSystem.business.abstracts.SystemPersonnelService;
+import hrms.humanResourcesManagementSystem.core.utilities.DataResult;
+import hrms.humanResourcesManagementSystem.core.utilities.Result;
 import hrms.humanResourcesManagementSystem.entities.SystemPersonnel;
 
 @RestController
@@ -19,29 +24,40 @@ public class SystemPersonnelsController {
 	
 	
 	@GetMapping("getall")
-	public List<SystemPersonnel> getAll(){
+	public DataResult<List<SystemPersonnel>> getAll(){
 		return this.systemPersonnelService.getAll();
 	}
 	
 	@GetMapping("getbyid")
-	public SystemPersonnel get(int id) {
+	public DataResult<SystemPersonnel> get(int id) {
 		return this.systemPersonnelService.get(id);
 	}
 	
-	@GetMapping("delete")
-	public void delete(SystemPersonnel systemPersonnel) {
-		this.systemPersonnelService.delete(systemPersonnel);
+	@PostMapping("delete")
+	public Result delete(int systemPersonnelId) {
+		return this.systemPersonnelService.delete(systemPersonnelId);
 	}
 	
-	@GetMapping("add")
-	public void add(SystemPersonnel systemPersonnel) {
-		this.systemPersonnelService.add(systemPersonnel);
+	@PostMapping("add")
+	public ResponseEntity<?> add(@RequestBody SystemPersonnel systemPersonnel) {
+		
+		Result result = this.systemPersonnelService.add(systemPersonnel);
+		
+		if (result.isSuccess()) {
+			return ResponseEntity.ok(result);
+		}
+		else {
+			return ResponseEntity.badRequest().body(result);
+		}
+		
 	}
 	
-	@GetMapping("update")
-	public void update(SystemPersonnel systemPersonnel){
-		this.systemPersonnelService.update(systemPersonnel);
+	@PostMapping("update")
+	public Result update(SystemPersonnel systemPersonnel){
+		return this.systemPersonnelService.update(systemPersonnel);
 	}
+	
+	
 	
 }
 

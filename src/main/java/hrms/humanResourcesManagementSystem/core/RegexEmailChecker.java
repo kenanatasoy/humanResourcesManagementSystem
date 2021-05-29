@@ -3,7 +3,7 @@ package hrms.humanResourcesManagementSystem.core;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class RegexUtil {
+public class RegexEmailChecker {
 	 public static boolean match(String email){
 	        String regex = "^[a-zA-Z0-9_!#$%&'*?`~^.-]+@[a-zA-Z-]+.[a-zA-Z]+$";
 	        Pattern pattern = Pattern.compile(regex);

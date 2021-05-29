@@ -1,10 +1,18 @@
 package hrms.humanResourcesManagementSystem.business.abstracts;
 
-import hrms.humanResourcesManagementSystem.core.User;
+import java.rmi.RemoteException;
+
+import hrms.humanResourcesManagementSystem.core.utilities.Result;
+import hrms.humanResourcesManagementSystem.entities.Employer;
+import hrms.humanResourcesManagementSystem.entities.JobSeeker;
 
 public interface AuthService {
 
-	boolean register(User user);
-	void login(String email, String password);
-
+	Result registerJobSeeker(JobSeeker jobSeeker) throws RemoteException;
+	Result registerEmployer(Employer employer) throws RemoteException;
+	Result login(String email, String password);
+	Result verifyJobSeeker(String userVCode, int jobSeekerId);
+	Result verifyEmployer(String userVCode, int employerId);
+	Result confirmEmployer(int systemPersonnelId, int employerId);
+	
 }

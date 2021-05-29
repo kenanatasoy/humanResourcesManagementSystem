@@ -1,52 +1,66 @@
 package hrms.humanResourcesManagementSystem.business.concretes;
 
+import java.rmi.RemoteException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import hrms.humanResourcesManagementSystem.business.abstracts.EmployerService;
+import hrms.humanResourcesManagementSystem.business.abstracts.UserValidationService;
+import hrms.humanResourcesManagementSystem.core.utilities.DataResult;
+import hrms.humanResourcesManagementSystem.core.utilities.ErrorResult;
+import hrms.humanResourcesManagementSystem.core.utilities.Result;
+import hrms.humanResourcesManagementSystem.core.utilities.SuccessDataResult;
+import hrms.humanResourcesManagementSystem.core.utilities.SuccessResult;
 import hrms.humanResourcesManagementSystem.dataAccess.abstracts.EmployerDao;
 import hrms.humanResourcesManagementSystem.entities.Employer;
 
 @Service
 public class EmployerManager implements EmployerService {
-
+	
+	
+	private EmployerDao employerDao;
+	private UserValidationService<Employer> employerValidator;
 	
 	@Autowired
-	private EmployerDao employerDao;
+	public EmployerManager(EmployerDao employerDao, @Qualifier("EmployerV") UserValidationService<Employer> employerValidator) {
+		super();
+		this.employerDao = employerDao;
+		this.employerValidator = employerValidator;
+	}
+
+	@Override
+	public DataResult<List<Employer>> getAll() {
+		return new SuccessDataResult<List<Employer>>(this.employerDao.findAll(), "Tüm işverenler listelendi");
+	}
+
+	@Override
+	public DataResult<Employer> get(int id) {
+		return new SuccessDataResult<Employer>(this.employerDao.getOne(id));
+	}
+
+	@Override
+	public Result add(Employer employer) throws RemoteException {
+		if(!this.employerValidator.validate(employer).isSuccess()) {
+			return new ErrorResult("İşverenin tüm alanları zorunludur. E-posta e-posta formatında olmalıdır.");
+		}
+		this.employerDao.saveAndFlush(employer);
+		return new SuccessResult();
+	}
+
+	@Override
+	public Result update(Employer employer) {
+		return new SuccessResult();
+	}
+
+	@Override
+	public Result delete(Employer employer) {
+		return new SuccessResult();
+	}
+	
+	
 
 	
-	@Override
-	public List<Employer> getAll() {
-		// TODO Auto-generated method stub
-		return this.employerDao.findAll();
-	}
-
-	@Override
-	public Employer get(int id) {
-		// TODO Auto-generated method stub
-		return this.employerDao.getOne(id);
-	}
-
-	@Override
-	public void add(Employer employer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void update(Employer employer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void delete(Employer employer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	
-
 }

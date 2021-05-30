@@ -15,17 +15,17 @@ import hrms.humanResourcesManagementSystem.core.utilities.Result;
 import hrms.humanResourcesManagementSystem.core.utilities.SuccessDataResult;
 import hrms.humanResourcesManagementSystem.core.utilities.SuccessResult;
 import hrms.humanResourcesManagementSystem.dataAccess.abstracts.EmployerDao;
-import hrms.humanResourcesManagementSystem.entities.Employer;
+import hrms.humanResourcesManagementSystem.entities.concretes.Employer;
 
 @Service
 public class EmployerManager implements EmployerService {
-	
 	
 	private EmployerDao employerDao;
 	private UserValidationService<Employer> employerValidator;
 	
 	@Autowired
-	public EmployerManager(EmployerDao employerDao, @Qualifier("EmployerV") UserValidationService<Employer> employerValidator) {
+	public EmployerManager(EmployerDao employerDao,
+			@Qualifier("EmployerV") UserValidationService<Employer> employerValidator) {
 		super();
 		this.employerDao = employerDao;
 		this.employerValidator = employerValidator;
@@ -44,7 +44,7 @@ public class EmployerManager implements EmployerService {
 	@Override
 	public Result add(Employer employer) throws RemoteException {
 		if(!this.employerValidator.validate(employer).isSuccess()) {
-			return new ErrorResult("İşverenin tüm alanları zorunludur. E-posta e-posta formatında olmalıdır.");
+			return new ErrorResult(this.employerValidator.validate(employer).getMessage());
 		}
 		this.employerDao.saveAndFlush(employer);
 		return new SuccessResult();
@@ -59,6 +59,10 @@ public class EmployerManager implements EmployerService {
 	public Result delete(Employer employer) {
 		return new SuccessResult();
 	}
+	
+	
+	
+//	boolean stat = (1 == 1) ? true : false;
 	
 	
 

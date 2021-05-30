@@ -10,7 +10,7 @@ import hrms.humanResourcesManagementSystem.core.utilities.DataResult;
 import hrms.humanResourcesManagementSystem.core.utilities.Result;
 import hrms.humanResourcesManagementSystem.core.utilities.SuccessResult;
 import hrms.humanResourcesManagementSystem.dataAccess.abstracts.SystemPersonnelConfirmOfEmployerDao;
-import hrms.humanResourcesManagementSystem.entities.SystemPersonnelConfirmOfEmployer;
+import hrms.humanResourcesManagementSystem.entities.concretes.SystemPersonnelConfirmOfEmployer;
 
 @Service
 public class SystemPersonnelConfirmOfEmployerManager implements SystemPersonnelConfirmOfEmployerService {

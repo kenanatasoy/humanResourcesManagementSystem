@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import hrms.humanResourcesManagementSystem.business.abstracts.AuthService;
 import hrms.humanResourcesManagementSystem.core.utilities.Result;
-import hrms.humanResourcesManagementSystem.entities.Employer;
-import hrms.humanResourcesManagementSystem.entities.JobSeeker;
+import hrms.humanResourcesManagementSystem.entities.concretes.Employer;
+import hrms.humanResourcesManagementSystem.entities.concretes.JobSeeker;
 
 @RestController
 @RequestMapping("/api/auth/")

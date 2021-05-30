@@ -4,7 +4,7 @@ import java.util.List;
 
 import hrms.humanResourcesManagementSystem.core.utilities.DataResult;
 import hrms.humanResourcesManagementSystem.core.utilities.Result;
-import hrms.humanResourcesManagementSystem.entities.VerificationCode;
+import hrms.humanResourcesManagementSystem.entities.concretes.VerificationCode;
 
 public interface VerificationCodeService {
 	

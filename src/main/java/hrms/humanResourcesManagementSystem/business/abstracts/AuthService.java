@@ -3,8 +3,8 @@ package hrms.humanResourcesManagementSystem.business.abstracts;
 import java.rmi.RemoteException;
 
 import hrms.humanResourcesManagementSystem.core.utilities.Result;
-import hrms.humanResourcesManagementSystem.entities.Employer;
-import hrms.humanResourcesManagementSystem.entities.JobSeeker;
+import hrms.humanResourcesManagementSystem.entities.concretes.Employer;
+import hrms.humanResourcesManagementSystem.entities.concretes.JobSeeker;
 
 public interface AuthService {
 

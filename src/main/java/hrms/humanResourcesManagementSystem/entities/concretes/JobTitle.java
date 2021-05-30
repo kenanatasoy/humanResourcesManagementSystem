@@ -1,15 +1,16 @@
-package hrms.humanResourcesManagementSystem.entities;
+package hrms.humanResourcesManagementSystem.entities.concretes;
 
-import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,23 +22,19 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
 @Entity
-@Table(name = "system_personnel_confirms")
-@Inheritance(strategy = InheritanceType.JOINED)
-public class SystemPersonnelConfirm {
+@Table(name = "job_titles")
+//@JsonIgnoreProperties({"hibernateLazyInitializer","handler","jobAdverts"})
+public class JobTitle {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private int id;
 	
-	@Column(name = "system_personnel_id")
-	private int systemPersonnelId;
+	@Column(name = "title", unique = true)
+	private String title;
 	
-	@Column(name = "did_confirm")
-	private boolean didConfirm;
-	
-	@Column(name = "confirm_date_time")
-	private LocalDateTime confirmDateTime;
-	
+//	@OneToMany(mappedBy = "jobTitle")
+//	private List<JobAdvert> jobAdverts;
 	
 }

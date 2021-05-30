@@ -5,7 +5,7 @@ import java.util.List;
 
 import hrms.humanResourcesManagementSystem.core.utilities.DataResult;
 import hrms.humanResourcesManagementSystem.core.utilities.Result;
-import hrms.humanResourcesManagementSystem.entities.Employer;
+import hrms.humanResourcesManagementSystem.entities.concretes.Employer;
 
 public interface EmployerService {
 	
@@ -14,5 +14,4 @@ public interface EmployerService {
 	Result add(Employer employer) throws RemoteException;
 	Result update(Employer employer);
 	Result delete(Employer employer);
-
 }

@@ -2,7 +2,7 @@ package hrms.humanResourcesManagementSystem.consoleUI;
 
 import java.time.LocalDate;
 
-import hrms.humanResourcesManagementSystem.entities.JobSeeker;
+import hrms.humanResourcesManagementSystem.entities.concretes.JobSeeker;
 
 
 public class Main {

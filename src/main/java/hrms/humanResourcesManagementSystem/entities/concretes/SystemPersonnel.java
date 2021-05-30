@@ -1,4 +1,4 @@
-package hrms.humanResourcesManagementSystem.entities;
+package hrms.humanResourcesManagementSystem.entities.concretes;
 
 
 import javax.persistence.Entity;

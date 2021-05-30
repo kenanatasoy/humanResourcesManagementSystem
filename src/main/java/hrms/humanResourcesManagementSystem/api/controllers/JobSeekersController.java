@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import hrms.humanResourcesManagementSystem.business.abstracts.JobSeekerService;
 import hrms.humanResourcesManagementSystem.core.utilities.DataResult;
 import hrms.humanResourcesManagementSystem.core.utilities.Result;
-import hrms.humanResourcesManagementSystem.entities.JobSeeker;
+import hrms.humanResourcesManagementSystem.entities.concretes.JobSeeker;
 
 @RestController
 @RequestMapping("/api/jobseekers/")

@@ -11,7 +11,7 @@ import hrms.humanResourcesManagementSystem.core.utilities.Result;
 import hrms.humanResourcesManagementSystem.core.utilities.SuccessDataResult;
 import hrms.humanResourcesManagementSystem.core.utilities.SuccessResult;
 import hrms.humanResourcesManagementSystem.dataAccess.abstracts.VerificationCodeDao;
-import hrms.humanResourcesManagementSystem.entities.VerificationCode;
+import hrms.humanResourcesManagementSystem.entities.concretes.VerificationCode;
 
 @Service
 public class VerificationCodeManager implements VerificationCodeService{

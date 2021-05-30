@@ -4,7 +4,7 @@ import java.util.List;
 
 import hrms.humanResourcesManagementSystem.core.utilities.DataResult;
 import hrms.humanResourcesManagementSystem.core.utilities.Result;
-import hrms.humanResourcesManagementSystem.entities.SystemPersonnelConfirmOfEmployer;
+import hrms.humanResourcesManagementSystem.entities.concretes.SystemPersonnelConfirmOfEmployer;
 
 public interface SystemPersonnelConfirmOfEmployerService {
 	DataResult<List<SystemPersonnelConfirmOfEmployer>> getAll();

@@ -5,7 +5,7 @@ import java.util.List;
 
 import hrms.humanResourcesManagementSystem.core.utilities.DataResult;
 import hrms.humanResourcesManagementSystem.core.utilities.Result;
-import hrms.humanResourcesManagementSystem.entities.JobSeeker;
+import hrms.humanResourcesManagementSystem.entities.concretes.JobSeeker;
 
 public interface JobSeekerService {
 	

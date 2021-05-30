@@ -1,4 +1,4 @@
-package hrms.humanResourcesManagementSystem.entities;
+package hrms.humanResourcesManagementSystem.entities.concretes;
 
 import java.time.LocalDate;
 

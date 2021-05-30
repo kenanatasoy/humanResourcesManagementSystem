@@ -9,7 +9,7 @@ import hrms.humanResourcesManagementSystem.core.RegexEmailChecker;
 import hrms.humanResourcesManagementSystem.core.utilities.ErrorResult;
 import hrms.humanResourcesManagementSystem.core.utilities.Result;
 import hrms.humanResourcesManagementSystem.core.utilities.SuccessResult;
-import hrms.humanResourcesManagementSystem.entities.Employer;
+import hrms.humanResourcesManagementSystem.entities.concretes.Employer;
 
 @Component("EmployerV")
 public class EmployerValidator implements UserValidationService<Employer> {
@@ -42,13 +42,19 @@ public class EmployerValidator implements UserValidationService<Employer> {
 		
 		
 		String[] splitStringArr1 = employer.getEmailAddress().split("@");
-		String[] splitStringArr2 = employer.getWebSite().split(".");
+		String[] splitStringArr2 = employer.getWebSite().split("\\.");
 		
 		
 		if( !splitStringArr1[1].equals(splitStringArr2[1] + "." + splitStringArr2[2]) ) {
 			return new ErrorResult("E-posta domain'i ile web sitesi domain'i aynı olmalıdır.");
 		}
 		
+		
+		System.out.println(splitStringArr1[0] + " " + splitStringArr1[1]);
+		
+		System.out.println(splitStringArr2[0] + " " + splitStringArr2[1] + " " + splitStringArr2[2]);		
+		
+		System.out.println(String.format("%s %s", splitStringArr1[0], splitStringArr1[1]));
 		
 		return new SuccessResult();
 		

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import hrms.humanResourcesManagementSystem.business.abstracts.SystemPersonnelService;
 import hrms.humanResourcesManagementSystem.core.utilities.DataResult;
 import hrms.humanResourcesManagementSystem.core.utilities.Result;
-import hrms.humanResourcesManagementSystem.entities.SystemPersonnel;
+import hrms.humanResourcesManagementSystem.entities.concretes.SystemPersonnel;
 
 @RestController
 @RequestMapping("/api/systempersonnels/")

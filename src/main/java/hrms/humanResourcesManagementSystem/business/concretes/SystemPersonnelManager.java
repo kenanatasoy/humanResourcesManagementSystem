@@ -11,7 +11,7 @@ import hrms.humanResourcesManagementSystem.core.utilities.Result;
 import hrms.humanResourcesManagementSystem.core.utilities.SuccessDataResult;
 import hrms.humanResourcesManagementSystem.core.utilities.SuccessResult;
 import hrms.humanResourcesManagementSystem.dataAccess.abstracts.SystemPersonnelDao;
-import hrms.humanResourcesManagementSystem.entities.SystemPersonnel;
+import hrms.humanResourcesManagementSystem.entities.concretes.SystemPersonnel;
 
 @Service
 public class SystemPersonnelManager implements SystemPersonnelService {

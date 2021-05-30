@@ -8,7 +8,7 @@ import hrms.humanResourcesManagementSystem.business.abstracts.UserValidationServ
 import hrms.humanResourcesManagementSystem.core.utilities.ErrorResult;
 import hrms.humanResourcesManagementSystem.core.utilities.Result;
 import hrms.humanResourcesManagementSystem.core.utilities.SuccessResult;
-import hrms.humanResourcesManagementSystem.entities.JobSeeker;
+import hrms.humanResourcesManagementSystem.entities.concretes.JobSeeker;
 
 @Component("JobSeekerV")
 public class JobSeekerValidator implements UserValidationService<JobSeeker> {

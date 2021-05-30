@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import hrms.humanResourcesManagementSystem.business.abstracts.EmployerService;
 import hrms.humanResourcesManagementSystem.core.utilities.DataResult;
 import hrms.humanResourcesManagementSystem.core.utilities.Result;
-import hrms.humanResourcesManagementSystem.entities.Employer;
+import hrms.humanResourcesManagementSystem.entities.concretes.Employer;
 
 @RestController
 @RequestMapping("/api/employers/")
@@ -19,7 +19,6 @@ public class EmployersController {
 
 	@Autowired
 	private EmployerService employerService;
-	
 	
 	@GetMapping("getall")
 	public DataResult<List<Employer>> getAll(){
@@ -53,7 +52,6 @@ public class EmployersController {
 	public Result update(Employer employer){
 		return this.employerService.update(employer);
 	}
-	
 	
 	
 }

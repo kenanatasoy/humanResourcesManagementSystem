@@ -16,10 +16,10 @@ import hrms.humanResourcesManagementSystem.core.RandomStringGenerator;
 import hrms.humanResourcesManagementSystem.core.utilities.ErrorResult;
 import hrms.humanResourcesManagementSystem.core.utilities.Result;
 import hrms.humanResourcesManagementSystem.core.utilities.SuccessResult;
-import hrms.humanResourcesManagementSystem.entities.Employer;
-import hrms.humanResourcesManagementSystem.entities.JobSeeker;
-import hrms.humanResourcesManagementSystem.entities.SystemPersonnelConfirmOfEmployer;
-import hrms.humanResourcesManagementSystem.entities.VerificationCode;
+import hrms.humanResourcesManagementSystem.entities.concretes.Employer;
+import hrms.humanResourcesManagementSystem.entities.concretes.JobSeeker;
+import hrms.humanResourcesManagementSystem.entities.concretes.SystemPersonnelConfirmOfEmployer;
+import hrms.humanResourcesManagementSystem.entities.concretes.VerificationCode;
 
 @Service
 public class AuthManager implements AuthService{
@@ -68,7 +68,8 @@ public class AuthManager implements AuthService{
 		+ verificationCode.getCode());
 		
 		
-		return new SuccessResult("Sisteme kaydınız gerçekleşti, hesabınızın aktifleştirilmesi için, e-postanı adresinize gelen doğrulama kodunu girin");
+		return new SuccessResult("Sisteme kaydınız gerçekleşti, hesabınızın aktifleştirilmesi için,"
+				+ " e-postanı adresinize gelen doğrulama kodunu girin");
 		
 	}
 	
@@ -91,6 +92,10 @@ public class AuthManager implements AuthService{
 		verificationCode.setUserId(employer.getId());
 		
 		this.verificationCodeService.add(verificationCode);
+		
+		String s = (employer.getEmailAddress().isBlank()) ? "kenan@kenanatasoy.com" : employer.getEmailAddress();
+		
+		employer.setEmailAddress(s);
 		
 		this.emailLogger.sendSimpleMessage(employer.getEmailAddress(), "Employer Registration Notice", 
 				"İşveren olarak sisteme başarıyla kaydoldunuz, şimdi bu doğrulama kodunu girerek hesabınızı doğrulayabilirsiniz: "

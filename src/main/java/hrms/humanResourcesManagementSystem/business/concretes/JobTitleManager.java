@@ -11,7 +11,7 @@ import hrms.humanResourcesManagementSystem.core.utilities.Result;
 import hrms.humanResourcesManagementSystem.core.utilities.SuccessDataResult;
 import hrms.humanResourcesManagementSystem.core.utilities.SuccessResult;
 import hrms.humanResourcesManagementSystem.dataAccess.abstracts.JobTitleDao;
-import hrms.humanResourcesManagementSystem.entities.JobTitle;
+import hrms.humanResourcesManagementSystem.entities.concretes.JobTitle;
 
 @Service
 public class JobTitleManager implements JobTitleService {

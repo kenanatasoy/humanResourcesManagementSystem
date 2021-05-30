@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import hrms.humanResourcesManagementSystem.business.abstracts.JobTitleService;
 import hrms.humanResourcesManagementSystem.core.utilities.DataResult;
 import hrms.humanResourcesManagementSystem.core.utilities.Result;
-import hrms.humanResourcesManagementSystem.entities.JobTitle;
+import hrms.humanResourcesManagementSystem.entities.concretes.JobTitle;
 
 @RestController
 @RequestMapping("/api/jobtitles/")
@@ -19,7 +19,6 @@ public class JobTitlesController {
 	
 	@Autowired
 	private JobTitleService jobTitleService;
-
 	
 	@GetMapping("getall")
 	public DataResult<List<JobTitle>> getAll(){

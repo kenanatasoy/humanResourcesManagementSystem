@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import hrms.humanResourcesManagementSystem.business.abstracts.SystemPersonnelService;
-import hrms.humanResourcesManagementSystem.core.utilities.DataResult;
-import hrms.humanResourcesManagementSystem.core.utilities.Result;
+import hrms.humanResourcesManagementSystem.core.utilities.results.DataResult;
+import hrms.humanResourcesManagementSystem.core.utilities.results.Result;
 import hrms.humanResourcesManagementSystem.entities.concretes.SystemPersonnel;
 
 @RestController

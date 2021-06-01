@@ -9,11 +9,11 @@ import org.springframework.stereotype.Service;
 
 import hrms.humanResourcesManagementSystem.business.abstracts.EmployerService;
 import hrms.humanResourcesManagementSystem.business.abstracts.UserValidationService;
-import hrms.humanResourcesManagementSystem.core.utilities.DataResult;
-import hrms.humanResourcesManagementSystem.core.utilities.ErrorResult;
-import hrms.humanResourcesManagementSystem.core.utilities.Result;
-import hrms.humanResourcesManagementSystem.core.utilities.SuccessDataResult;
-import hrms.humanResourcesManagementSystem.core.utilities.SuccessResult;
+import hrms.humanResourcesManagementSystem.core.utilities.results.DataResult;
+import hrms.humanResourcesManagementSystem.core.utilities.results.ErrorResult;
+import hrms.humanResourcesManagementSystem.core.utilities.results.Result;
+import hrms.humanResourcesManagementSystem.core.utilities.results.SuccessDataResult;
+import hrms.humanResourcesManagementSystem.core.utilities.results.SuccessResult;
 import hrms.humanResourcesManagementSystem.dataAccess.abstracts.EmployerDao;
 import hrms.humanResourcesManagementSystem.entities.concretes.Employer;
 
@@ -59,7 +59,6 @@ public class EmployerManager implements EmployerService {
 	public Result delete(Employer employer) {
 		return new SuccessResult();
 	}
-	
 	
 	
 //	boolean stat = (1 == 1) ? true : false;

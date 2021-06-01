@@ -2,7 +2,7 @@ package hrms.humanResourcesManagementSystem.business.abstracts;
 
 import java.rmi.RemoteException;
 
-import hrms.humanResourcesManagementSystem.core.utilities.Result;
+import hrms.humanResourcesManagementSystem.core.utilities.results.Result;
 import hrms.humanResourcesManagementSystem.entities.concretes.Employer;
 import hrms.humanResourcesManagementSystem.entities.concretes.JobSeeker;
 

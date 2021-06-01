@@ -1,19 +1,17 @@
 package hrms.humanResourcesManagementSystem.business.concretes;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import hrms.humanResourcesManagementSystem.business.abstracts.EmailService;
 import hrms.humanResourcesManagementSystem.business.abstracts.EmployerService;
 import hrms.humanResourcesManagementSystem.business.abstracts.JobAdvertService;
-import hrms.humanResourcesManagementSystem.core.utilities.DataResult;
-import hrms.humanResourcesManagementSystem.core.utilities.Result;
-import hrms.humanResourcesManagementSystem.core.utilities.SuccessDataResult;
-import hrms.humanResourcesManagementSystem.core.utilities.SuccessResult;
+import hrms.humanResourcesManagementSystem.core.utilities.results.DataResult;
+import hrms.humanResourcesManagementSystem.core.utilities.results.Result;
+import hrms.humanResourcesManagementSystem.core.utilities.results.SuccessDataResult;
+import hrms.humanResourcesManagementSystem.core.utilities.results.SuccessResult;
 import hrms.humanResourcesManagementSystem.dataAccess.abstracts.JobAdvertDao;
 import hrms.humanResourcesManagementSystem.entities.concretes.Employer;
 import hrms.humanResourcesManagementSystem.entities.concretes.JobAdvert;
@@ -26,45 +24,48 @@ public class JobAdvertManager implements JobAdvertService {
 	private JobAdvertDao jobAdvertDao;
 	
 	@Autowired
-	private ModelMapper modelMapper;
-	
-	@Autowired
 	private EmployerService employerService;
 	
 	@Autowired
 	private EmailService emailService;
-	
-	@Override
-	public DataResult<List<JobAdvertDto>> getAllJobAds() {
-		
-		List<JobAdvertDto> jobAdvertDtos = new ArrayList<JobAdvertDto>();
-		
-		this.jobAdvertDao.findByActiveTrue().stream().forEach(adv->{
-			JobAdvertDto jDto = modelMapper.map(adv, JobAdvertDto.class);
-			Employer employer = this.employerService.get(adv.getEmployerId()).getData();
-			jDto.setCompanyName(employer.getCompanyName());
-			jobAdvertDtos.add(jDto);
-		});
 
-		return new SuccessDataResult<List<JobAdvertDto>>(jobAdvertDtos, "Tüm veriler listelendi.");
+
+//	@Override
+//	public DataResult<List<JobAdvertDto>> getAllJobAds() {
+//		
+//		List<JobAdvertDto> jobAdvertDtos = new ArrayList<JobAdvertDto>();
+//		
+//		this.jobAdvertDao.findByActiveTrue().stream().forEach(adv->{
+//			JobAdvertDto jDto = modelMapper.map(adv, JobAdvertDto.class);
+//			Employer employer = this.employerService.get(adv.getEmployer().getId()).getData();
+//			jDto.setCompanyName(employer.getCompanyName());
+//			jobAdvertDtos.add(jDto);
+//		});
+//
+//		return new SuccessDataResult<List<JobAdvertDto>>(jobAdvertDtos, "Tüm veriler listelendi.");
+//	}
+
+	@Override
+	public DataResult<List<JobAdvertDto>> getJobAdvertDtosByActiveTrue(){
+		return new SuccessDataResult<List<JobAdvertDto>>(this.jobAdvertDao.getJobAdvertDtosActiveTrue(),
+				"Veri listelendi.");
 	}
 	
 	@Override
 	public DataResult<List<JobAdvert>> getAll(){
 		return new SuccessDataResult<List<JobAdvert>>(this.jobAdvertDao.findAll());
 	}
-
+	
 	@Override
 	public DataResult<JobAdvert> get(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return new SuccessDataResult<JobAdvert>(this.jobAdvertDao.getOne(id));
 	}
 
 	@Override
 	public Result add(JobAdvert jobAdvert) {
 
 		this.jobAdvertDao.saveAndFlush(jobAdvert);
-		Employer employer = this.employerService.get(jobAdvert.getEmployerId()).getData();
+		Employer employer = this.employerService.get(jobAdvert.getEmployer().getId()).getData();
 		this.emailService.sendSimpleMessage(employer.getEmailAddress(), "Job Advert Addition Notice",
 				"İş ilanını eklediniz.");
 		return new SuccessResult(employer.getFirstName() + " başarıyla iş ilanını ekledi.");
@@ -77,7 +78,7 @@ public class JobAdvertManager implements JobAdvertService {
 		JobAdvert jobAdvert = this.jobAdvertDao.getOne(jobAdvertId);
 		jobAdvert.setActive(!jobAdvert.isActive());
 		this.jobAdvertDao.saveAndFlush(jobAdvert);
-		Employer employer = this.employerService.get(jobAdvert.getEmployerId()).getData();
+		Employer employer = this.employerService.get(jobAdvert.getEmployer().getId()).getData();
 		this.emailService.sendSimpleMessage(employer.getEmailAddress(), "Job Advert Passive Notice",
 				"İş ilanının aktif-pasif olma durumunu değiştirdiniz.");
 		return new SuccessResult(employer.getFirstName() + " iş ilanının aktif-pasif olma durumunu değiştirdi.");
@@ -95,5 +96,7 @@ public class JobAdvertManager implements JobAdvertService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	
 	
 }

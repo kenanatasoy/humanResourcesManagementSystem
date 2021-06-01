@@ -6,10 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import hrms.humanResourcesManagementSystem.business.abstracts.UserService;
-import hrms.humanResourcesManagementSystem.core.User;
-import hrms.humanResourcesManagementSystem.core.utilities.DataResult;
-import hrms.humanResourcesManagementSystem.core.utilities.Result;
-import hrms.humanResourcesManagementSystem.core.utilities.SuccessDataResult;
+import hrms.humanResourcesManagementSystem.core.entities.User;
+import hrms.humanResourcesManagementSystem.core.utilities.results.DataResult;
+import hrms.humanResourcesManagementSystem.core.utilities.results.Result;
+import hrms.humanResourcesManagementSystem.core.utilities.results.SuccessDataResult;
 import hrms.humanResourcesManagementSystem.dataAccess.abstracts.UserDao;
 
 @Service

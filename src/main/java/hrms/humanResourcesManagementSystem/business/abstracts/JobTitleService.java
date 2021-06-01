@@ -2,8 +2,8 @@ package hrms.humanResourcesManagementSystem.business.abstracts;
 
 import java.util.List;
 
-import hrms.humanResourcesManagementSystem.core.utilities.DataResult;
-import hrms.humanResourcesManagementSystem.core.utilities.Result;
+import hrms.humanResourcesManagementSystem.core.utilities.results.DataResult;
+import hrms.humanResourcesManagementSystem.core.utilities.results.Result;
 import hrms.humanResourcesManagementSystem.entities.concretes.JobTitle;
 
 public interface JobTitleService {

@@ -6,9 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import hrms.humanResourcesManagementSystem.business.abstracts.SystemPersonnelConfirmService;
-import hrms.humanResourcesManagementSystem.core.utilities.DataResult;
-import hrms.humanResourcesManagementSystem.core.utilities.Result;
-import hrms.humanResourcesManagementSystem.core.utilities.SuccessResult;
+import hrms.humanResourcesManagementSystem.core.utilities.results.DataResult;
+import hrms.humanResourcesManagementSystem.core.utilities.results.Result;
+import hrms.humanResourcesManagementSystem.core.utilities.results.SuccessResult;
 import hrms.humanResourcesManagementSystem.dataAccess.abstracts.SystemPersonnelConfirmDao;
 import hrms.humanResourcesManagementSystem.entities.concretes.SystemPersonnelConfirm;
 

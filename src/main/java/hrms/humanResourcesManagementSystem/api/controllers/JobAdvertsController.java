@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import hrms.humanResourcesManagementSystem.business.abstracts.JobAdvertService;
-import hrms.humanResourcesManagementSystem.core.utilities.DataResult;
-import hrms.humanResourcesManagementSystem.core.utilities.Result;
+import hrms.humanResourcesManagementSystem.core.utilities.results.DataResult;
+import hrms.humanResourcesManagementSystem.core.utilities.results.Result;
 import hrms.humanResourcesManagementSystem.entities.concretes.JobAdvert;
 import hrms.humanResourcesManagementSystem.entities.dtos.JobAdvertDto;
 
@@ -22,19 +22,11 @@ public class JobAdvertsController {
 
 	@Autowired
 	private JobAdvertService jobAdvertService;
+
 	
-	
-	@GetMapping("getAllJobAds")
-	public ResponseEntity<?> getAllJobAds(){
-		
-		DataResult<List<JobAdvertDto>> dataResult = this.jobAdvertService.getAllJobAds();
-		
-		if (dataResult.isSuccess()) {
-			return ResponseEntity.ok(dataResult);
-		}
-		else {
-			return ResponseEntity.badRequest().body(dataResult);
-		}
+	@GetMapping("getJobAdvertDtosByActiveTrue")
+	public DataResult<List<JobAdvertDto>> getJobAdvertDtosByActiveTrue(){
+		return this.jobAdvertService.getJobAdvertDtosByActiveTrue();
 	}
 	
 	@GetMapping("getAll")

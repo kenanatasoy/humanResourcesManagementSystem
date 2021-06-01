@@ -1,4 +1,4 @@
-package hrms.humanResourcesManagementSystem.core;
+package hrms.humanResourcesManagementSystem.core.adapters;
 
 import java.net.MalformedURLException;
 import java.net.URI;
@@ -7,8 +7,8 @@ import java.net.URL;
 import org.springframework.stereotype.Component;
 
 import hrms.humanResourcesManagementSystem.business.abstracts.UserValidationService;
-import hrms.humanResourcesManagementSystem.core.utilities.ErrorResult;
-import hrms.humanResourcesManagementSystem.core.utilities.Result;
+import hrms.humanResourcesManagementSystem.core.utilities.results.ErrorResult;
+import hrms.humanResourcesManagementSystem.core.utilities.results.Result;
 import hrms.humanResourcesManagementSystem.entities.concretes.JobSeeker;
 import tr.gov.nvi.tckimlik.ws.KPSPublic;
 import tr.gov.nvi.tckimlik.ws.KPSPublicSoap;

@@ -2,9 +2,9 @@ package hrms.humanResourcesManagementSystem.business.abstracts;
 
 import java.util.List;
 
-import hrms.humanResourcesManagementSystem.core.User;
-import hrms.humanResourcesManagementSystem.core.utilities.DataResult;
-import hrms.humanResourcesManagementSystem.core.utilities.Result;
+import hrms.humanResourcesManagementSystem.core.entities.User;
+import hrms.humanResourcesManagementSystem.core.utilities.results.DataResult;
+import hrms.humanResourcesManagementSystem.core.utilities.results.Result;
 
 public interface UserService {
 	DataResult<List<User>> getAll();

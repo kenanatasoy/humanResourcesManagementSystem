@@ -10,11 +10,11 @@ import org.springframework.stereotype.Service;
 import hrms.humanResourcesManagementSystem.business.abstracts.JobSeekerService;
 import hrms.humanResourcesManagementSystem.business.abstracts.UserService;
 import hrms.humanResourcesManagementSystem.business.abstracts.UserValidationService;
-import hrms.humanResourcesManagementSystem.core.utilities.DataResult;
-import hrms.humanResourcesManagementSystem.core.utilities.ErrorResult;
-import hrms.humanResourcesManagementSystem.core.utilities.Result;
-import hrms.humanResourcesManagementSystem.core.utilities.SuccessDataResult;
-import hrms.humanResourcesManagementSystem.core.utilities.SuccessResult;
+import hrms.humanResourcesManagementSystem.core.utilities.results.DataResult;
+import hrms.humanResourcesManagementSystem.core.utilities.results.ErrorResult;
+import hrms.humanResourcesManagementSystem.core.utilities.results.Result;
+import hrms.humanResourcesManagementSystem.core.utilities.results.SuccessDataResult;
+import hrms.humanResourcesManagementSystem.core.utilities.results.SuccessResult;
 import hrms.humanResourcesManagementSystem.dataAccess.abstracts.JobSeekerDao;
 import hrms.humanResourcesManagementSystem.entities.concretes.JobSeeker;
 
@@ -57,7 +57,7 @@ public class JobSeekerManager implements JobSeekerService{
 		
 		
 		if(!jobSeekerValidator.validate(jobSeeker).isSuccess()) {	
-			return new ErrorResult("İş arayanın isim, soyisim, e-posta adresi, şifre, doğum tarihi ve kimlik numarası zorunludur.");
+			return new ErrorResult(jobSeekerValidator.validate(jobSeeker).getMessage());
 		}
 		
 		else if(!mernisServiceAdapter.validate(jobSeeker).isSuccess()) {

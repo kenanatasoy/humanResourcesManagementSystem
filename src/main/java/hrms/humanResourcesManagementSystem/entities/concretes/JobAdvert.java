@@ -27,14 +27,14 @@ public class JobAdvert {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(name = "job_title_id")
-	private int jobTitleId;
-	
-	@Column(name = "city_id")
-	private int cityId;
-	
-	@Column(name = "employer_id")
-	private int employerId;
+//	@Column(name = "city_id")
+//	private int cityId;
+//
+//	@Column(name = "job_title_id")
+//	private int jobTitleId;
+//	
+//	@Column(name = "employer_id")
+//	private int employerId;
 	
 	@Column(name = "job_definition")
 	private String jobDefinition;
@@ -57,17 +57,17 @@ public class JobAdvert {
 	@Column(name = "is_active")
 	private boolean active;
 	
-//	@ManyToOne()
-//	@JoinColumn(name = "city_id")
-//	private City city;
-//	
-//	@ManyToOne()
-//	@JoinColumn(name = "job_title_id")
-//	private JobTitle jobTitle;
-//	
-//	@ManyToOne()
-//	@JoinColumn(name = "employer_id")
-//	private Employer employer;
+	@ManyToOne()
+	@JoinColumn(name = "city_id")
+	private City city;
+	
+	@ManyToOne()
+	@JoinColumn(name = "job_title_id")
+	private JobTitle jobTitle;
+	
+	@ManyToOne()
+	@JoinColumn(name = "employer_id")
+	private Employer employer;
 	
 	
 }

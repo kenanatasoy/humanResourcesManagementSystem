@@ -1,4 +1,4 @@
-package hrms.humanResourcesManagementSystem.core.utilities;
+package hrms.humanResourcesManagementSystem.core.utilities.results;
 
 public class ErrorDataResult<T> extends DataResult<T> {
 

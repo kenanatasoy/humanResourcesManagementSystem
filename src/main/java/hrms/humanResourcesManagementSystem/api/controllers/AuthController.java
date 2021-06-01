@@ -1,16 +1,26 @@
 package hrms.humanResourcesManagementSystem.api.controllers;
 
 import java.rmi.RemoteException;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import hrms.humanResourcesManagementSystem.business.abstracts.AuthService;
-import hrms.humanResourcesManagementSystem.core.utilities.Result;
+import hrms.humanResourcesManagementSystem.core.utilities.results.ErrorDataResult;
+import hrms.humanResourcesManagementSystem.core.utilities.results.Result;
 import hrms.humanResourcesManagementSystem.entities.concretes.Employer;
 import hrms.humanResourcesManagementSystem.entities.concretes.JobSeeker;
 
@@ -22,7 +32,7 @@ public class AuthController {
 	private AuthService authService;
 	
 	@PostMapping("registerjobseeker")
-	public ResponseEntity<?> registerJobSeeker(@RequestBody JobSeeker jobSeeker) throws RemoteException{
+	public ResponseEntity<?> registerJobSeeker(@Valid @RequestBody JobSeeker jobSeeker) throws RemoteException{
 		
 		Result result = this.authService.registerJobSeeker(jobSeeker);
 		
@@ -35,7 +45,7 @@ public class AuthController {
 	}
 
 	@PostMapping("registeremployer")
-	public ResponseEntity<?> registerEmployer(@RequestBody Employer employer) throws RemoteException{
+	public ResponseEntity<?> registerEmployer(@Valid @RequestBody Employer employer) throws RemoteException{
 		
 		Result result = this.authService.registerEmployer(employer);
 		
@@ -88,4 +98,25 @@ public class AuthController {
 		}
 		
 	}
+	
+	
+	
+	
+	@ExceptionHandler(MethodArgumentNotValidException.class)
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	public ErrorDataResult<Object> handleValidationException(MethodArgumentNotValidException exceptions) {
+		Map<String,String> validationErrors = new HashMap<String, String>();
+		for(FieldError fieldError : exceptions.getBindingResult().getFieldErrors()) {
+			validationErrors.put(fieldError.getField(), fieldError.getDefaultMessage());
+		}
+
+		ErrorDataResult<Object> errors 
+		= new ErrorDataResult<Object>(validationErrors,"Doğrulama hataları");
+		return errors;
+		
+	}
+	
+	
 }
+
+

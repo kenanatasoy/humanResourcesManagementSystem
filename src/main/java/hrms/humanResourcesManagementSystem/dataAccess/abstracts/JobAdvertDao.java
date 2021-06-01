@@ -11,28 +11,24 @@ import hrms.humanResourcesManagementSystem.entities.dtos.JobAdvertDto;
 
 @Repository
 public interface JobAdvertDao extends JpaRepository<JobAdvert, Integer> {
+	
+	@Query("select new hrms.humanResourcesManagementSystem.entities.dtos.JobAdvertDto"
+            + "(e.companyName, jT.title, jA.numberOfOpenPositions,"
+            + " jA.publishedDateTime, jA.deadLineForAppeal) from Employer e"
+            + " inner join e.jobAdverts jA inner join jA.jobTitle jT where jA.active = true")
+	List<JobAdvertDto> getJobAdvertDtosByActiveTrue();
 
 	@Query("select new hrms.humanResourcesManagementSystem.entities.dtos.JobAdvertDto"
-			+ "(jA.id, e.companyName, jA.numberOfOpenPositions,"
-			+ " jA.publishedDateTime, jA.deadLineForAppeal) from Employer e"
-			+ " inner join e.jobAdverts jA")
-	List<JobAdvertDto> getJobAdvertDtosActiveTrue();
+            + "(e.companyName, jT.title, jA.numberOfOpenPositions,"
+            + " jA.publishedDateTime, jA.deadLineForAppeal) from Employer e"
+            + " inner join e.jobAdverts jA inner join jA.jobTitle jT where jA.active = true order by  jA.publishedDateTime desc")
+	List<JobAdvertDto> getJobAdvertDtosByPublishedDateTimeAndActiveTrue();
 
-//			+ " inner join jT.jobAdverts jA")
-	
-//	@Query("select new hrms.humanResourcesManagementSystem.entities.dtos.JobAdvertDto"
-//			+ "(jA.id, e.companyName, jT.title, jA.numberOfOpenPositions,"
-//			+ " jA.publishedDateTime, jA.deadLineForAppeal) from Employer e, JobTitle jT"
-//			+ " inner join e.jobAdverts jA"
-//			+ " inner join jT.jobAdverts jA")
-//	List<JobAdvertDto> getJobAdvertDtosByPublishedDateTimeAndActiveTrue();
-	
-//	@Query("select new hrms.humanResourcesManagementSystem.entities.dtos.JobAdvertDto"
-//			+ "(jA.id, e.companyName, jT.title, jA.numberOfOpenPositions,"
-//			+ " jA.publishedDateTime, jA.deadLineForAppeal) from Employer e, JobTitle jT"
-//			+ " inner join e.jobAdverts jA"
-//			+ " inner join jT.jobAdverts jA")
-//	List<JobAdvertDto> getJobAdvertDtosByEmployerIdAndActiveTrue(int EmployerId);
-
+	@Query("select new hrms.humanResourcesManagementSystem.entities.dtos.JobAdvertDto"
+            + "(e.companyName, jT.title, jA.numberOfOpenPositions,"
+            + " jA.publishedDateTime, jA.deadLineForAppeal) from Employer e"
+            + " inner join e.jobAdverts jA inner join jA.jobTitle jT where jA.active = true"
+            + " and e.id=:employerId")
+	List<JobAdvertDto> getJobAdvertDtosByEmployerIdAndActiveTrue(int employerId);
 
 }

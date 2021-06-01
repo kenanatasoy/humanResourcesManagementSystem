@@ -10,6 +10,8 @@ import hrms.humanResourcesManagementSystem.entities.dtos.JobAdvertDto;
 public interface JobAdvertService {
 	
 	DataResult<List<JobAdvertDto>> getJobAdvertDtosByActiveTrue();
+	DataResult<List<JobAdvertDto>> getJobAdvertDtosByPublishedDateTimeAndActiveTrue();
+	DataResult<List<JobAdvertDto>> getJobAdvertDtosByEmployerIdAndActiveTrue(int employerId);
 	DataResult<List<JobAdvert>> getAll();
 	DataResult<JobAdvert> get(int id);
 	Result add (JobAdvert jobAdvert);

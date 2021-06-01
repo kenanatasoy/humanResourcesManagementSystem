@@ -41,12 +41,12 @@ public class User {
 	
 	@NotNull
 	@NotBlank
-	@Email
+//	@Email
 	@Column(name = "email_address", unique = true)
 	private String emailAddress;
 	
 //	TODO: Anostasyonlar ile custom validation konusunu öğrenince işverenin web sitesi ile
-//	aynı domain'e sahip e-posta girmesi koşulunu yazıcağız
+//	aynı domain'e sahip e-posta girmesi koşulunu yazıcağız, ve e-posta formatını doğrulamayı geliştiriceğiz, düzelticeğiz
 	
 	@NotNull
 	@NotBlank

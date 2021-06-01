@@ -14,6 +14,7 @@ import hrms.humanResourcesManagementSystem.business.abstracts.JobAdvertService;
 import hrms.humanResourcesManagementSystem.core.utilities.results.DataResult;
 import hrms.humanResourcesManagementSystem.core.utilities.results.Result;
 import hrms.humanResourcesManagementSystem.entities.concretes.JobAdvert;
+import hrms.humanResourcesManagementSystem.entities.dtos.JobAdvertAddDto;
 import hrms.humanResourcesManagementSystem.entities.dtos.JobAdvertDto;
 
 @RestController
@@ -27,6 +28,16 @@ public class JobAdvertsController {
 	@GetMapping("getJobAdvertDtosByActiveTrue")
 	public DataResult<List<JobAdvertDto>> getJobAdvertDtosByActiveTrue(){
 		return this.jobAdvertService.getJobAdvertDtosByActiveTrue();
+	}
+
+	@GetMapping("getJobAdvertDtosByPublishedDateTimeAndActiveTrue")
+	DataResult<List<JobAdvertDto>> getJobAdvertDtosByPublishedDateTimeAndActiveTrue(){
+		return this.jobAdvertService.getJobAdvertDtosByPublishedDateTimeAndActiveTrue();
+	}
+	
+	@GetMapping("getJobAdvertDtosByEmployerIdAndActiveTrue")
+	DataResult<List<JobAdvertDto>> getJobAdvertDtosByEmployerIdAndActiveTrue(int employerId){
+		return this.jobAdvertService.getJobAdvertDtosByEmployerIdAndActiveTrue(employerId);
 	}
 	
 	@GetMapping("getAll")
@@ -42,8 +53,13 @@ public class JobAdvertsController {
 		}
 	}
 	
-	@PostMapping("addjobadvert")
-	public ResponseEntity<?> addJobAdvert(@RequestBody JobAdvert jobAdvert) {
+	@PostMapping("addjobadvertdto")
+	public ResponseEntity<?> addJobAdvert(@RequestBody JobAdvertAddDto jobAdvertAddDto) {
+		
+		JobAdvert jobAdvert = new JobAdvert(jobAdvertAddDto.getCityId(), jobAdvertAddDto.getJobTitleId(), 
+				jobAdvertAddDto.getEmployerId(), jobAdvertAddDto.getJobDefinition(),
+				jobAdvertAddDto.getMinSalary(), jobAdvertAddDto.getMaxSalary(),
+				jobAdvertAddDto.getNumberOfOpenPositions(), jobAdvertAddDto.getDeadLineForAppeal());
 		
 		Result result = this.jobAdvertService.add(jobAdvert);
 		

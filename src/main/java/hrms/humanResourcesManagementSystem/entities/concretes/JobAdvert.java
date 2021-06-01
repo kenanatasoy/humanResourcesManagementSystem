@@ -10,6 +10,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
+import org.springframework.lang.Nullable;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -36,31 +40,43 @@ public class JobAdvert {
 //	@Column(name = "employer_id")
 //	private int employerId;
 	
+	@NotNull
+	@NotBlank
 	@Column(name = "job_definition")
 	private String jobDefinition;
 
-	@Column(name = "min_salary", nullable = true)
-	private int minSalary;
+	@Nullable
+	@Column(name = "min_salary")
+	private Integer minSalary;
 	
-	@Column(name = "max_salary", nullable = true)
-	private int maxSalary;
+	@Nullable
+	@Column(name = "max_salary")
+	private Integer maxSalary;
 	
+	@NotNull
+	@NotBlank
 	@Column(name = "number_of_open_positions")
 	private int numberOfOpenPositions;
 	
 	@Column(name = "published_date_time")
-	private LocalDateTime publishedDateTime;
+	private LocalDateTime publishedDateTime = LocalDateTime.now();
 	
+	@NotNull
+	@NotBlank
 	@Column(name = "deadline_for_appeal")
-	private LocalDateTime deadlineForAppeal;
+	private LocalDateTime deadLineForAppeal;
 	
 	@Column(name = "is_active")
-	private boolean active;
+	private boolean active = true;
 	
+	@NotNull
+	@NotBlank
 	@ManyToOne()
 	@JoinColumn(name = "city_id")
 	private City city;
 	
+	@NotNull
+	@NotBlank
 	@ManyToOne()
 	@JoinColumn(name = "job_title_id")
 	private JobTitle jobTitle;
@@ -68,6 +84,22 @@ public class JobAdvert {
 	@ManyToOne()
 	@JoinColumn(name = "employer_id")
 	private Employer employer;
+
+	public JobAdvert(int cityId, int jobTitleId, int employerId, String jobDefinition, Integer minSalary, Integer maxSalary, int numberOfOpenPositions,
+			LocalDateTime deadLineForAppeal) {
+		super();
+		this.jobDefinition = jobDefinition;
+		this.minSalary = minSalary;
+		this.maxSalary = maxSalary;
+		this.numberOfOpenPositions = numberOfOpenPositions;
+		this.deadLineForAppeal = deadLineForAppeal;
+		this.city = new City();
+		this.jobTitle = new JobTitle();
+		this.employer = new Employer();
+		this.city.setId(cityId);
+		this.jobTitle.setId(jobTitleId);
+		this.employer.setId(employerId);
+	}
 	
 	
 }

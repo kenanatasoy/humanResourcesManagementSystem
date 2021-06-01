@@ -47,8 +47,20 @@ public class JobAdvertManager implements JobAdvertService {
 
 	@Override
 	public DataResult<List<JobAdvertDto>> getJobAdvertDtosByActiveTrue(){
-		return new SuccessDataResult<List<JobAdvertDto>>(this.jobAdvertDao.getJobAdvertDtosActiveTrue(),
+		return new SuccessDataResult<List<JobAdvertDto>>(this.jobAdvertDao.getJobAdvertDtosByActiveTrue(),
 				"Veri listelendi.");
+	}
+	
+	@Override
+	public DataResult<List<JobAdvertDto>> getJobAdvertDtosByPublishedDateTimeAndActiveTrue() {
+		return new SuccessDataResult<List<JobAdvertDto>>(this.jobAdvertDao.getJobAdvertDtosByPublishedDateTimeAndActiveTrue(),
+				"Veri listelendi");
+	}
+	
+	@Override
+	public DataResult<List<JobAdvertDto>> getJobAdvertDtosByEmployerIdAndActiveTrue(int employerId) {
+		return new SuccessDataResult<List<JobAdvertDto>>(this.jobAdvertDao
+				.getJobAdvertDtosByEmployerIdAndActiveTrue(employerId), "Veri listelendi");
 	}
 	
 	@Override
@@ -66,10 +78,12 @@ public class JobAdvertManager implements JobAdvertService {
 
 		this.jobAdvertDao.saveAndFlush(jobAdvert);
 		Employer employer = this.employerService.get(jobAdvert.getEmployer().getId()).getData();
-		this.emailService.sendSimpleMessage(employer.getEmailAddress(), "Job Advert Addition Notice",
+		this.emailService.sendSimpleMessage("kenanatasoy@outlook.com", "Job Advert Addition Notice",
 				"İş ilanını eklediniz.");
 		return new SuccessResult(employer.getFirstName() + " başarıyla iş ilanını ekledi.");
-		
+
+//		TODO: Buraya generic, dinamik bir email adresi girilecek,
+//		statik email adresi değiştirilecek
 	}
 
 	@Override

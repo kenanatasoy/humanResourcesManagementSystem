@@ -8,6 +8,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import hrms.humanResourcesManagementSystem.core.entities.User;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -16,6 +18,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false)
 @Entity
 @Table(name = "job_seekers")
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler","jobSeekerCVs"})
 public class JobSeeker extends User{
 	
 	@NotNull
@@ -24,9 +27,11 @@ public class JobSeeker extends User{
 	private String nationalIdNo;
 	
 	@NotNull
-	@NotBlank
 	@Column(name = "birth_date")
 	private LocalDate birthDate;
+	
+//	@OneToMany(mappedBy = "jobSeeker")
+//	private List<JobSeekerCV> jobSeekerCVs;
 	
 	
 }

@@ -84,9 +84,13 @@ public class JobAdvert {
 	@ManyToOne()
 	@JoinColumn(name = "employer_id")
 	private Employer employer;
-
+	
+	
+	
+	
 	public JobAdvert(int cityId, int jobTitleId, int employerId, String jobDefinition, Integer minSalary, Integer maxSalary, int numberOfOpenPositions,
 			LocalDateTime deadLineForAppeal) {
+		
 		super();
 		this.jobDefinition = jobDefinition;
 		this.minSalary = minSalary;
@@ -99,6 +103,7 @@ public class JobAdvert {
 		this.city.setId(cityId);
 		this.jobTitle.setId(jobTitleId);
 		this.employer.setId(employerId);
+
 	}
 	
 	

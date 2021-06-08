@@ -3,14 +3,13 @@ package hrms.humanResourcesManagementSystem.api.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import hrms.humanResourcesManagementSystem.business.abstracts.EmployerService;
 import hrms.humanResourcesManagementSystem.core.utilities.results.DataResult;
-import hrms.humanResourcesManagementSystem.core.utilities.results.Result;
 import hrms.humanResourcesManagementSystem.entities.concretes.Employer;
 
 @RestController
@@ -20,25 +19,38 @@ public class EmployersController {
 	@Autowired
 	private EmployerService employerService;
 	
+	
 	@GetMapping("getall")
-	public DataResult<List<Employer>> getAll(){
-		return this.employerService.getAll();
+	public ResponseEntity<?> getAll(){
+		
+		DataResult<List<Employer>> dataResult = this.employerService.getAll();
+		
+		if (dataResult.isSuccess()) {
+			return ResponseEntity.ok(dataResult);
+		}
+		else {
+			return ResponseEntity.badRequest().body(dataResult);
+		}
 	}
 	
 	@GetMapping("getbyid")
-	public DataResult<Employer> get(int id) {
-		return this.employerService.get(id);
-	}
-	
-	@PostMapping("delete")
-	public Result delete(Employer employer) {
-		return this.employerService.delete(employer);
+	public ResponseEntity<?> get(int id) {
+		
+		DataResult<Employer> dataResult = this.employerService.get(id);
+		
+		if (dataResult.isSuccess()) {
+			return ResponseEntity.ok(dataResult);
+		}
+		else {
+			return ResponseEntity.badRequest().body(dataResult);
+		}
+		
 	}
 	
 //	@PostMapping("add")
-//	public ResponseEntity<?> add(@RequestBody Employer employer) {
+//	public ResponseEntity<?> add(@RequestBody Employer employer){
 //		
-//		Result result = this.employerService.add(employer);
+//		Result result = this.employerService.add(jobSeeker);
 //		
 //		if (result.isSuccess()) {
 //			return ResponseEntity.ok(result);
@@ -46,12 +58,10 @@ public class EmployersController {
 //		else {
 //			return ResponseEntity.badRequest().body(result);
 //		}
+//		
 //	}
 	
-	@PostMapping("update")
-	public Result update(Employer employer){
-		return this.employerService.update(employer);
-	}
+	
 	
 	
 }

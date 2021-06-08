@@ -31,6 +31,7 @@ public class AuthController {
 	@Autowired
 	private AuthService authService;
 	
+	
 	@PostMapping("registerjobseeker")
 	public ResponseEntity<?> registerJobSeeker(@Valid @RequestBody JobSeeker jobSeeker) throws RemoteException{
 		
@@ -56,8 +57,6 @@ public class AuthController {
 			return ResponseEntity.badRequest().body(result);
 		}
 	}
-	
-	
 	
 	@PostMapping("verifyjobseeker")
 	public ResponseEntity<?> verifyJobSeeker(String userVCode, int jobSeekerId){
@@ -98,6 +97,8 @@ public class AuthController {
 		}
 		
 	}
+	
+	
 	
 	
 	

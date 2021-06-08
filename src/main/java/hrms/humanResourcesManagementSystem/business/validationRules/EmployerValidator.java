@@ -23,7 +23,8 @@ public class EmployerValidator implements UserValidationService<Employer> {
 		
 		String[] splitStringArr1 = employer.getEmailAddress().split("@");
 		String[] splitStringArr2 = employer.getWebSite().split("\\.");
-		
+	
+		// TODO: Buralar iş koduna çevrilecek
 		
 		if( !splitStringArr1[1].equals(splitStringArr2[1] + "." + splitStringArr2[2]) ) {
 			return new ErrorResult("E-posta domain'i ile web sitesi domain'i aynı olmalıdır.");

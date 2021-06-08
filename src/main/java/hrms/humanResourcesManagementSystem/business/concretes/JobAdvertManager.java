@@ -15,6 +15,7 @@ import hrms.humanResourcesManagementSystem.core.utilities.results.SuccessResult;
 import hrms.humanResourcesManagementSystem.dataAccess.abstracts.JobAdvertDao;
 import hrms.humanResourcesManagementSystem.entities.concretes.Employer;
 import hrms.humanResourcesManagementSystem.entities.concretes.JobAdvert;
+import hrms.humanResourcesManagementSystem.entities.dtos.JobAdvertAddDto;
 import hrms.humanResourcesManagementSystem.entities.dtos.JobAdvertDto;
 
 @Service
@@ -74,28 +75,36 @@ public class JobAdvertManager implements JobAdvertService {
 	}
 
 	@Override
-	public Result add(JobAdvert jobAdvert) {
+	public Result add(JobAdvertAddDto jobAdvertAddDto) {
 
+		JobAdvert jobAdvert = new JobAdvert(jobAdvertAddDto.getCityId(), jobAdvertAddDto.getJobTitleId(),
+				jobAdvertAddDto.getEmployerId(), jobAdvertAddDto.getJobDefinition(), jobAdvertAddDto.getMinSalary(),
+				jobAdvertAddDto.getMaxSalary(), jobAdvertAddDto.getNumberOfOpenPositions(),
+				jobAdvertAddDto.getDeadLineForAppeal());
+		
 		this.jobAdvertDao.saveAndFlush(jobAdvert);
 		Employer employer = this.employerService.get(jobAdvert.getEmployer().getId()).getData();
 		this.emailService.sendSimpleMessage("kenanatasoy@outlook.com", "Job Advert Addition Notice",
 				"İş ilanını eklediniz.");
 		return new SuccessResult(employer.getFirstName() + " başarıyla iş ilanını ekledi.");
 
-//		TODO: Buraya generic, dinamik bir email adresi girilecek,
-//		statik email adresi değiştirilecek
+//		TODO: Buraya dinamik bir email adresi girilecek,
+//		statik email adresi değiştirilecek, statik email adresi test için girilmiştir.
 	}
 
 	@Override
-	public Result toggleJobAdActivePassive(int employerId, int jobAdvertId) {
-		
+	public Result toggleJobAdActivePassive(int jobAdvertId) {
 		JobAdvert jobAdvert = this.jobAdvertDao.getOne(jobAdvertId);
+		
+//		isActive = jobAdvert.isActive() == isActive ? true : false;
+		
 		jobAdvert.setActive(!jobAdvert.isActive());
 		this.jobAdvertDao.saveAndFlush(jobAdvert);
 		Employer employer = this.employerService.get(jobAdvert.getEmployer().getId()).getData();
 		this.emailService.sendSimpleMessage(employer.getEmailAddress(), "Job Advert Passive Notice",
 				"İş ilanının aktif-pasif olma durumunu değiştirdiniz.");
-		return new SuccessResult(employer.getFirstName() + " iş ilanının aktif-pasif olma durumunu değiştirdi.");
+		return new SuccessResult(employer.getFirstName() + " iş ilanının aktif-pasif olma durumunu değiştirdi."
+				+ jobAdvert.isActive());
 		
 	}
 	

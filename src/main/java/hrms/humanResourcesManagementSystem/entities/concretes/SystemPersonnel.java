@@ -13,7 +13,6 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false)
 @Entity
 @Table(name = "system_personnels")
-
 public class SystemPersonnel extends User{
 
 	

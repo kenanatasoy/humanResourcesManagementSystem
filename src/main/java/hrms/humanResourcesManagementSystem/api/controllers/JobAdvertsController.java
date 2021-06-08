@@ -24,64 +24,84 @@ public class JobAdvertsController {
 	@Autowired
 	private JobAdvertService jobAdvertService;
 
-	
+
 	@GetMapping("getJobAdvertDtosByActiveTrue")
-	public DataResult<List<JobAdvertDto>> getJobAdvertDtosByActiveTrue(){
-		return this.jobAdvertService.getJobAdvertDtosByActiveTrue();
+	public ResponseEntity<?> getJobAdvertDtosByActiveTrue() {
+		
+		DataResult<List<JobAdvertDto>> dataResult = this.jobAdvertService.getJobAdvertDtosByActiveTrue();
+
+		if (dataResult.isSuccess()) {
+			return ResponseEntity.ok(dataResult);
+		} 
+		else {
+			return ResponseEntity.badRequest().body(dataResult);
+		}
+
 	}
 
 	@GetMapping("getJobAdvertDtosByPublishedDateTimeAndActiveTrue")
-	DataResult<List<JobAdvertDto>> getJobAdvertDtosByPublishedDateTimeAndActiveTrue(){
-		return this.jobAdvertService.getJobAdvertDtosByPublishedDateTimeAndActiveTrue();
-	}
-	
-	@GetMapping("getJobAdvertDtosByEmployerIdAndActiveTrue")
-	DataResult<List<JobAdvertDto>> getJobAdvertDtosByEmployerIdAndActiveTrue(int employerId){
-		return this.jobAdvertService.getJobAdvertDtosByEmployerIdAndActiveTrue(employerId);
-	}
-	
-	@GetMapping("getAll")
-	public ResponseEntity<?> getAll(){
+	public ResponseEntity<?> getJobAdvertDtosByPublishedDateTimeAndActiveTrue() {
 		
-		DataResult<List<JobAdvert>> dataResult = this.jobAdvertService.getAll();
+		DataResult<List<JobAdvertDto>> dataResult = this.jobAdvertService.getJobAdvertDtosByPublishedDateTimeAndActiveTrue();
 		
 		if (dataResult.isSuccess()) {
 			return ResponseEntity.ok(dataResult);
+		} 
+		else {
+			return ResponseEntity.badRequest().body(dataResult);
 		}
+		
+	}
+
+	@GetMapping("getJobAdvertDtosByEmployerIdAndActiveTrue")
+	public ResponseEntity<?> getJobAdvertDtosByEmployerIdAndActiveTrue(int employerId) {
+		
+		DataResult<List<JobAdvertDto>> dataResult = this.jobAdvertService.getJobAdvertDtosByEmployerIdAndActiveTrue(employerId);
+	
+		if (dataResult.isSuccess()) {
+			return ResponseEntity.ok(dataResult);
+		} 
 		else {
 			return ResponseEntity.badRequest().body(dataResult);
 		}
 	}
-	
+
+	@GetMapping("getAll")
+	public ResponseEntity<?> getAll() {
+
+		DataResult<List<JobAdvert>> dataResult = this.jobAdvertService.getAll();
+
+		if (dataResult.isSuccess()) {
+			return ResponseEntity.ok(dataResult);
+		} else {
+			return ResponseEntity.badRequest().body(dataResult);
+		}
+	}
+
 	@PostMapping("addjobadvertdto")
 	public ResponseEntity<?> addJobAdvert(@RequestBody JobAdvertAddDto jobAdvertAddDto) {
-		
-		JobAdvert jobAdvert = new JobAdvert(jobAdvertAddDto.getCityId(), jobAdvertAddDto.getJobTitleId(), 
-				jobAdvertAddDto.getEmployerId(), jobAdvertAddDto.getJobDefinition(),
-				jobAdvertAddDto.getMinSalary(), jobAdvertAddDto.getMaxSalary(),
-				jobAdvertAddDto.getNumberOfOpenPositions(), jobAdvertAddDto.getDeadLineForAppeal());
-		
-		Result result = this.jobAdvertService.add(jobAdvert);
-		
+
+		Result result = this.jobAdvertService.add(jobAdvertAddDto);
+
 		if (result.isSuccess()) {
 			return ResponseEntity.ok(result);
-		}
-		else {
+		} else {
 			return ResponseEntity.badRequest().body(result);
 		}
+		
 	}
-	
+
 	@PostMapping("toggleJobAdActivePassive")
-	public ResponseEntity<?> toggleJobAdActivePassive(int employerId, int jobAdvertId){
-		
-		Result result = this.jobAdvertService.toggleJobAdActivePassive(employerId, jobAdvertId);
-		
+	public ResponseEntity<?> toggleJobAdActivePassive(int jobAdvertId) {
+
+		Result result = this.jobAdvertService.toggleJobAdActivePassive(jobAdvertId);
+
 		if (result.isSuccess()) {
 			return ResponseEntity.ok(result);
-		}
-		else {
+		} else {
 			return ResponseEntity.badRequest().body(result);
 		}
+		
 	}
-	
+
 }

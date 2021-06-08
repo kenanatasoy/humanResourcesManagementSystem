@@ -9,8 +9,8 @@ import javax.persistence.Column;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import hrms.humanResourcesManagementSystem.core.entities.User;
@@ -44,10 +44,9 @@ public class Employer extends User {
 	@Column(name = "phone_number")
 	private String phoneNumber;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "employer")
 	private List<JobAdvert> jobAdverts;
 	
-//	@Setter(AccessLevel.NONE)
-//	private String calcPhoneNumber;
 	
 }

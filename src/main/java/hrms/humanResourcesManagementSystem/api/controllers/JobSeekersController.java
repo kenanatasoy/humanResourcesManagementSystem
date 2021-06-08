@@ -27,18 +27,31 @@ public class JobSeekersController {
 	
 	
 	@GetMapping("getall")
-	public DataResult<List<JobSeeker>> getAll(){
-		return this.jobSeekerService.getAll();
+	public ResponseEntity<?> getAll(){
+		
+		DataResult<List<JobSeeker>> dataResult = this.jobSeekerService.getAll();
+		
+		if (dataResult.isSuccess()) {
+			return ResponseEntity.ok(dataResult);
+		}
+		else {
+			return ResponseEntity.badRequest().body(dataResult);
+		}
+		
 	}
 	
 	@GetMapping("getbyid")
-	public DataResult<JobSeeker> get(int id) {
-		return this.jobSeekerService.get(id);
-	}
-	
-	@PostMapping("delete")
-	public Result delete(JobSeeker jobSeeker) {
-		return this.jobSeekerService.delete(jobSeeker);
+	public ResponseEntity<?> get(int id) {
+		
+		DataResult<JobSeeker> dataResult = this.jobSeekerService.get(id);
+		
+		if (dataResult.isSuccess()) {
+			return ResponseEntity.ok(dataResult);
+		}
+		else {
+			return ResponseEntity.badRequest().body(dataResult);
+		}
+		
 	}
 	
 //	@PostMapping("add")
@@ -57,9 +70,19 @@ public class JobSeekersController {
 //	}
 	
 	@PostMapping("update")
-	public Result update(JobSeeker jobSeeker){
-		return this.jobSeekerService.update(jobSeeker);
+	public ResponseEntity<?> update(JobSeeker jobSeeker){
+		
+		Result result = this.jobSeekerService.update(jobSeeker);
+		
+		if (result.isSuccess()) {
+			return ResponseEntity.ok(result);
+		}
+		else {
+			return ResponseEntity.badRequest().body(result);
+		}
+		
 	}
+	
 	
 	
 	

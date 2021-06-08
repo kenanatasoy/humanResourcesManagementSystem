@@ -21,43 +21,73 @@ public class SystemPersonnelsController {
 
 	@Autowired
 	private SystemPersonnelService systemPersonnelService;
-	
-	
+
+
 	@GetMapping("getall")
-	public DataResult<List<SystemPersonnel>> getAll(){
-		return this.systemPersonnelService.getAll();
+	public ResponseEntity<?> getAll() {
+
+		DataResult<List<SystemPersonnel>> dataResult = this.systemPersonnelService.getAll();
+
+		if (dataResult.isSuccess()) {
+			return ResponseEntity.ok(dataResult);
+		}
+		else {
+			return ResponseEntity.badRequest().body(dataResult);
+		}
 	}
-	
+
 	@GetMapping("getbyid")
-	public DataResult<SystemPersonnel> get(int id) {
-		return this.systemPersonnelService.get(id);
-	}
-	
-	@PostMapping("delete")
-	public Result delete(int systemPersonnelId) {
-		return this.systemPersonnelService.delete(systemPersonnelId);
+	public ResponseEntity<?> get(int id) {
+		
+		DataResult<SystemPersonnel> dataResult = this.systemPersonnelService.get(id);
+		
+		if (dataResult.isSuccess()) {
+			return ResponseEntity.ok(dataResult);
+		}
+		else {
+			return ResponseEntity.badRequest().body(dataResult);
+		}
 	}
 	
 	@PostMapping("add")
 	public ResponseEntity<?> add(@RequestBody SystemPersonnel systemPersonnel) {
-		
+
 		Result result = this.systemPersonnelService.add(systemPersonnel);
-		
+
 		if (result.isSuccess()) {
 			return ResponseEntity.ok(result);
-		}
+		} 
 		else {
 			return ResponseEntity.badRequest().body(result);
 		}
-		
-	}
-	
-	@PostMapping("update")
-	public Result update(SystemPersonnel systemPersonnel){
-		return this.systemPersonnelService.update(systemPersonnel);
-	}
-	
-	
-	
-}
 
+	}
+
+	@PostMapping("update")
+	public ResponseEntity<?> update(SystemPersonnel systemPersonnel) {
+		
+		Result result = this.systemPersonnelService.update(systemPersonnel);
+		
+		if (result.isSuccess()) {
+			return ResponseEntity.ok(result);
+		} 
+		else {
+			return ResponseEntity.badRequest().body(result);
+		}
+	}
+	
+	@PostMapping("delete")
+	public ResponseEntity<?> delete(int systemPersonnelId) {
+		
+		Result result = this.systemPersonnelService.delete(systemPersonnelId);
+		
+		if (result.isSuccess()) {
+			return ResponseEntity.ok(result);
+		} 
+		else {
+			return ResponseEntity.badRequest().body(result);
+		}
+	}
+
+
+}

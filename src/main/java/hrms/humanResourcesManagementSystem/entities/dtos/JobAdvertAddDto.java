@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class JobAdvertAddDto {
+	
 	private int cityId;
 	private int jobTitleId;
 	private int employerId;
@@ -18,4 +19,5 @@ public class JobAdvertAddDto {
 	private Integer maxSalary;
 	private int numberOfOpenPositions;
 	private LocalDateTime deadLineForAppeal;
+
 }

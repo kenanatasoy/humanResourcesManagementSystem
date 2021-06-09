@@ -36,6 +36,19 @@ public class JobSeekerCVController {
 		}
 
 	}
+	
+	@GetMapping("getByJobSeekerId")
+	public ResponseEntity<?> getByJobSeekerId(int jobSeekerId){
+		
+		DataResult<List<JobSeekerCV>> dataResult = this.jobSeekerCVService.getByJobSeekerId(jobSeekerId);
+		
+		if (dataResult.isSuccess()) {
+			return ResponseEntity.ok(dataResult);
+		} else {
+			return ResponseEntity.badRequest().body(dataResult);
+		}
+		
+	}
 
 	@GetMapping("getbyid")
 	public ResponseEntity<?> get(int id) {

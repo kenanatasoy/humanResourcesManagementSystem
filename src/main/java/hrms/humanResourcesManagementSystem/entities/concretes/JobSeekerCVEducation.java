@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -56,10 +57,21 @@ public class JobSeekerCVEducation {
 	private LocalDate graduationDate;
 	
 	@Column(name = "added_date_time")
-	private LocalDateTime addedDateTime;
+	private LocalDateTime addedDateTime = LocalDateTime.now();
 	
-//	@Setter(AccessLevel.NONE)
-//	private String calcPhoneNumber;
+	@Column(name = "status")
+	private String status;
+	
+	@PrePersist
+	void setStatus() {
+		
+		if(graduationDate != null) {
+			this.status = "Tamamlanmış";
+		}
+		if(graduationDate == null){
+			this.status = "Devam Ediyor";
+		}
+	}
 	
 //	@JsonIgnore
 	@JsonIgnoreProperties({"jobSeekerCVEducations", "githubAddress", "linkedInAddress",
@@ -87,7 +99,7 @@ public class JobSeekerCVEducation {
 
 	
 	public JobSeekerCVEducation(int degreeId, int schoolId, int facultyId, 
-			int studyFieldId, LocalDate startingDate, LocalDate graduationDate, LocalDateTime addedDateTime,
+			int studyFieldId, LocalDate startingDate, LocalDate graduationDate,
 			int jobSeekerCVId) {
 		
 		this.educationDegree = new EducationDegree();
@@ -110,8 +122,6 @@ public class JobSeekerCVEducation {
 		this.startingDate = startingDate;
 		
 		this.graduationDate = graduationDate;
-		
-		this.addedDateTime = addedDateTime;
 		
 	}
 	

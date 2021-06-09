@@ -44,8 +44,7 @@ public class JobSeekerCVEducationManager implements JobSeekerCVEducationService 
 		JobSeekerCVEducation jobSeekerCVEducation = new JobSeekerCVEducation(jobSeekerCVEducationAddDto.getDegreeId(),
 				jobSeekerCVEducationAddDto.getSchoolId(), jobSeekerCVEducationAddDto.getFacultyId(),
 				jobSeekerCVEducationAddDto.getStudyFieldId(), jobSeekerCVEducationAddDto.getStartingDate(),
-				jobSeekerCVEducationAddDto.getGraduationDate(), jobSeekerCVEducationAddDto.getAddedDateTime(),
-				jobSeekerCVEducationAddDto.getJobSeekerCVId());
+				jobSeekerCVEducationAddDto.getGraduationDate(), jobSeekerCVEducationAddDto.getJobSeekerCVId());
 		
 		this.jobSeekerCVEducationDao.save(jobSeekerCVEducation);
 		return new SuccessResult();

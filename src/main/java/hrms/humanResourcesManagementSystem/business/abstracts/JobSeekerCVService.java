@@ -10,6 +10,7 @@ import hrms.humanResourcesManagementSystem.entities.dtos.JobSeekerCVAddDto;
 public interface JobSeekerCVService {
 	
 	DataResult<List<JobSeekerCV>> getAll();
+	DataResult<List<JobSeekerCV>> getByJobSeekerId(int jobSeekerId);
 	DataResult<JobSeekerCV> get(int id);
 	Result add(JobSeekerCVAddDto jobSeekerCVAddDto);
 	Result add(JobSeekerCV jobSeekerCV);

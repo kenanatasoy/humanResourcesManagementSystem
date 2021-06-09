@@ -26,6 +26,11 @@ public class JobSeekerCVManager implements JobSeekerCVService {
 	}
 
 	@Override
+	public DataResult<List<JobSeekerCV>> getByJobSeekerId(int jobSeekerId){
+		return new SuccessDataResult<List<JobSeekerCV>>(this.jobSeekerCVDao.getByJobSeekerId(jobSeekerId));
+	}
+	
+	@Override
 	public DataResult<JobSeekerCV> get(int id) {
 		return new SuccessDataResult<JobSeekerCV>(this.jobSeekerCVDao.findById(id).orElse(null));
 	}

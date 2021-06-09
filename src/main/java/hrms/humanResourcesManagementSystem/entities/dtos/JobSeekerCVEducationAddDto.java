@@ -1,7 +1,6 @@
 package hrms.humanResourcesManagementSystem.entities.dtos;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -22,7 +21,6 @@ public class JobSeekerCVEducationAddDto {
 	private LocalDate startingDate;
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private LocalDate graduationDate;
-	private LocalDateTime addedDateTime;
 	private int jobSeekerCVId;
 
 }

@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -47,12 +48,19 @@ public class JobSeekerCVExperience {
 	@Column(name = "ending_date")
 	private LocalDate endingDate;
 	
-//	@Setter()
-//	private String status;
-//	
-//	void setStatus(status) {
-//		TODO: Burda bir setter yazılacak
-//	}
+	@Column(name = "status")
+	private String status;
+	
+	@PrePersist
+	void setStatus() {
+		
+		if(endingDate != null) {
+			this.status = "Tamamlanmış";
+		}
+		if(endingDate == null){
+			this.status = "Devam Ediyor";
+		}
+	}
 	
 	@Column(name = "added_date_time")
 	private LocalDateTime addedDateTime = LocalDateTime.now();

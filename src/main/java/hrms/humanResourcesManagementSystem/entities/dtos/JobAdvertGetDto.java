@@ -9,11 +9,15 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class JobAdvertDto {
+public class JobAdvertGetDto {
 
+	// Mapped with Jpql Query in JobAdvertDao
+	private Integer id;
 	private String companyName;
 	private String title;
-	private int numberOfOpenPositions;
+	private String city;
+	private String jobDefinition;
+	private Integer numberOfOpenPositions;
 	private LocalDateTime publishedDateTime;
 	private LocalDateTime deadLineForAppeal;
 

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,28 +19,29 @@ import hrms.humanResourcesManagementSystem.entities.dtos.JobSeekerCVExperienceAd
 
 @RestController
 @RequestMapping("/api/jobseekercvexperiences/")
+@CrossOrigin
 public class JobSeekerCVExperienceController {
 	
 	@Autowired
 	private JobSeekerCVExperienceService jobSeekerCVExperienceService;
 	
 	
-	@GetMapping("getall")
-	public ResponseEntity<?> getAll(){
-		
-		DataResult<List<JobSeekerCVExperience>> dataResult = this.jobSeekerCVExperienceService.getAll();
-		
-		if (dataResult.isSuccess()) {
-			return ResponseEntity.ok(dataResult);
-		}
-		else {
-			return ResponseEntity.badRequest().body(dataResult);
-		}
-		
-	}
+//	@GetMapping("getall")
+//	public ResponseEntity<?> getAll(){
+//		
+//		DataResult<List<JobSeekerCVExperience>> dataResult = this.jobSeekerCVExperienceService.getAll();
+//		
+//		if (dataResult.isSuccess()) {
+//			return ResponseEntity.ok(dataResult);
+//		}
+//		else {
+//			return ResponseEntity.badRequest().body(dataResult);
+//		}
+//		
+//	}
 	
 	@GetMapping("getAllByJobSeekerCVIdOrderByEndingDateDesc")
-	public ResponseEntity<?> getAllByJobSeekerCVIdOrderByEndingDateDesc(int jobSeekerCVId){
+	public ResponseEntity<?> getAllByJobSeekerCVIdOrderByEndingDateDesc(Integer jobSeekerCVId){
 		
 		DataResult<List<JobSeekerCVExperience>> dataResult = this.jobSeekerCVExperienceService
 				.getAllByJobSeekerCVIdOrderByEndingDateDesc(jobSeekerCVId);
@@ -54,7 +56,7 @@ public class JobSeekerCVExperienceController {
 	}
 	
 	@GetMapping("getbyid")
-	public ResponseEntity<?> get(int id) {
+	public ResponseEntity<?> get(Integer id) {
 		
 		DataResult<JobSeekerCVExperience> dataResult = this.jobSeekerCVExperienceService.get(id);
 		

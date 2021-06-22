@@ -1,9 +1,8 @@
 package hrms.humanResourcesManagementSystem.api.controllers;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,28 +17,29 @@ import hrms.humanResourcesManagementSystem.entities.concretes.JobSeekerCVImage;
 
 @RestController
 @RequestMapping("/api/jobseekercvimages/")
+@CrossOrigin
 public class JobSeekerCVImageController {
 
 	@Autowired
 	private JobSeekerCVImageService jobSeekerCVImageService;
 
 
-	@GetMapping("getallimages")
-	public ResponseEntity<?> getAll(){
-		
-		DataResult<List<JobSeekerCVImage>> dataResult = this.jobSeekerCVImageService.getAll();
-		
-		if (dataResult.isSuccess()) {
-			return ResponseEntity.ok(dataResult);
-		}
-		else {
-			return ResponseEntity.badRequest().body(dataResult);
-		}
-		
-	}
+//	@GetMapping("getallimages")
+//	public ResponseEntity<?> getAll(){
+//		
+//		DataResult<List<JobSeekerCVImage>> dataResult = this.jobSeekerCVImageService.getAll();
+//		
+//		if (dataResult.isSuccess()) {
+//			return ResponseEntity.ok(dataResult);
+//		}
+//		else {
+//			return ResponseEntity.badRequest().body(dataResult);
+//		}
+//		
+//	}
 	
-	@GetMapping("getbyimageid")
-	public ResponseEntity<?> get(int id) {
+	@GetMapping("getbyid")
+	public ResponseEntity<?> get(Integer id) {
 		
 		DataResult<JobSeekerCVImage> dataResult = this.jobSeekerCVImageService.get(id);
 		
@@ -53,7 +53,7 @@ public class JobSeekerCVImageController {
 	}
 	
 	@PostMapping("uploadimage")
-	public ResponseEntity<?> add(@RequestBody MultipartFile multipartFile, int jobSeekerCVId) {
+	public ResponseEntity<?> add(@RequestBody MultipartFile multipartFile, Integer jobSeekerCVId) {
 		
 		Result result = this.jobSeekerCVImageService.saveImage(multipartFile, jobSeekerCVId);
 		

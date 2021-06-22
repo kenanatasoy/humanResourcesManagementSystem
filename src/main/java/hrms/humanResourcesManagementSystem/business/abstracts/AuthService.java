@@ -13,6 +13,7 @@ public interface AuthService {
 	Result login(String email, String password);
 	Result verifyJobSeeker(String userVCode, int jobSeekerId);
 	Result verifyEmployer(String userVCode, int employerId);
-	Result confirmEmployer(int systemPersonnelId, int employerId);
+	Result systemPersonnelConfirmOfEmployer(int systemPersonnelId, int employerId);
+	Result systemPersonnelConfirmOfJobAdvert(int systemPersonnelId, int jobAdvertId);
 	
 }

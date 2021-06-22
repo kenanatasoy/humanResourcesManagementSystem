@@ -11,13 +11,16 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class JobAdvertAddDto {
 	
-	private int cityId;
-	private int jobTitleId;
-	private int employerId;
+	// Mapped with Constructor
+	private Integer cityId;
+	private Integer jobTitleId;
+	private Integer employerId;
+	private Integer jobTypeId;
+	private Integer jobStyleId;
 	private String jobDefinition;
 	private Integer minSalary;
 	private Integer maxSalary;
-	private int numberOfOpenPositions;
+	private Integer numberOfOpenPositions;
 	private LocalDateTime deadLineForAppeal;
 
 }

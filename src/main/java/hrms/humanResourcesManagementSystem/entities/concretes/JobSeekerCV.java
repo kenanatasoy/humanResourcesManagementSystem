@@ -31,22 +31,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer","handler","jobAdverts"})
-// Bu ne alaka burda
 public class JobSeekerCV {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
-	private int id;
+	private Integer id;
 	
 	@Column(name = "job_seeker_id")
-	private int jobSeekerId;
-	
-	@Column(name = "github_address")
-	private String githubAddress;
-	
-	@Column(name = "linkedin_address")
-	private String linkedInAddress;
+	private Integer jobSeekerId;
 	
 	@Column(name = "cover_letter")
 	private String coverLetter;
@@ -62,7 +55,7 @@ public class JobSeekerCV {
 	private Date lastUpdatedDateTime;
 	
 	@Column(name = "is_active")
-	private boolean active;
+	private Boolean active;
 	
 //	@Column(name = "job_seeker_CV_image_id")
 //	private int jobSeekerCVImageId;
@@ -75,8 +68,8 @@ public class JobSeekerCV {
 	@OneToMany(mappedBy = "jobSeekerCV", cascade = CascadeType.ALL)
 	private List<JobSeekerCVSkill> jobSeekerCVSkills;
 	
-	@OneToMany(mappedBy = "jobSeekerCV", cascade = CascadeType.ALL)
-	private List<JobSeekerCVLanguage> jobSeekerCVLanguages;
+//	@OneToMany(mappedBy = "jobSeekerCV", cascade = CascadeType.ALL)
+//	private List<JobSeekerCVLanguage> jobSeekerCVLanguages;
 	
 	@OneToMany(mappedBy = "jobSeekerCV", cascade = CascadeType.ALL)
 	private List<JobSeekerCVExperience> jobSeekerCVExperiences;
@@ -91,13 +84,10 @@ public class JobSeekerCV {
 	
 	
 	
-	public JobSeekerCV(int jobSeekerId, String githubAddress, String linkedInAddress,
-			String coverLetter, boolean active) {
+	public JobSeekerCV(int jobSeekerId, String coverLetter, boolean active) {
 			
 			super();
 			this.jobSeekerId = jobSeekerId;
-			this.githubAddress = githubAddress;
-			this.linkedInAddress = linkedInAddress;
 			this.coverLetter = coverLetter;
 			this.active = active;
 //			this.jobSeekerCVImage = new JobSeekerCVImage();

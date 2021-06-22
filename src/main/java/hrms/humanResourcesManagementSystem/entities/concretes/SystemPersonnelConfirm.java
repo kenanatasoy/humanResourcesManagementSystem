@@ -11,6 +11,8 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
+import com.sun.istack.Nullable;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -28,13 +30,14 @@ public class SystemPersonnelConfirm {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
-	private int id;
+	private Integer id;
 	
+	@Nullable
 	@Column(name = "system_personnel_id")
-	private int systemPersonnelId;
+	private Integer systemPersonnelId;
 	
 	@Column(name = "did_confirm")
-	private boolean didConfirm;
+	private Boolean didConfirm;
 	
 	@Column(name = "confirm_date_time")
 	private LocalDateTime confirmDateTime;

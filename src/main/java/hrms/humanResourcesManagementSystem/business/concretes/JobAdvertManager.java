@@ -8,15 +8,18 @@ import org.springframework.stereotype.Service;
 import hrms.humanResourcesManagementSystem.business.abstracts.EmailService;
 import hrms.humanResourcesManagementSystem.business.abstracts.EmployerService;
 import hrms.humanResourcesManagementSystem.business.abstracts.JobAdvertService;
+import hrms.humanResourcesManagementSystem.business.abstracts.SystemPersonnelConfirmOfJobAdvertService;
 import hrms.humanResourcesManagementSystem.core.utilities.results.DataResult;
+import hrms.humanResourcesManagementSystem.core.utilities.results.ErrorResult;
 import hrms.humanResourcesManagementSystem.core.utilities.results.Result;
 import hrms.humanResourcesManagementSystem.core.utilities.results.SuccessDataResult;
 import hrms.humanResourcesManagementSystem.core.utilities.results.SuccessResult;
 import hrms.humanResourcesManagementSystem.dataAccess.abstracts.JobAdvertDao;
 import hrms.humanResourcesManagementSystem.entities.concretes.Employer;
 import hrms.humanResourcesManagementSystem.entities.concretes.JobAdvert;
+import hrms.humanResourcesManagementSystem.entities.concretes.SystemPersonnelConfirmOfJobAdvert;
 import hrms.humanResourcesManagementSystem.entities.dtos.JobAdvertAddDto;
-import hrms.humanResourcesManagementSystem.entities.dtos.JobAdvertDto;
+import hrms.humanResourcesManagementSystem.entities.dtos.JobAdvertGetDto;
 
 @Service
 public class JobAdvertManager implements JobAdvertService {
@@ -29,6 +32,9 @@ public class JobAdvertManager implements JobAdvertService {
 	
 	@Autowired
 	private EmailService emailService;
+	
+	@Autowired
+	private SystemPersonnelConfirmOfJobAdvertService systemPersonnelConfirmOfJobAdvertService;
 
 
 //	@Override
@@ -47,21 +53,27 @@ public class JobAdvertManager implements JobAdvertService {
 //	}
 
 	@Override
-	public DataResult<List<JobAdvertDto>> getJobAdvertDtosByActiveTrue(){
-		return new SuccessDataResult<List<JobAdvertDto>>(this.jobAdvertDao.getJobAdvertDtosByActiveTrue(),
+	public DataResult<List<JobAdvertGetDto>> getConfirmedJobAdvertDtosByActiveTrue(){
+		return new SuccessDataResult<List<JobAdvertGetDto>>(this.jobAdvertDao.getConfirmedJobAdvertDtosByActiveTrue(),
 				"Veri listelendi.");
 	}
 	
 	@Override
-	public DataResult<List<JobAdvertDto>> getJobAdvertDtosByPublishedDateTimeAndActiveTrue() {
-		return new SuccessDataResult<List<JobAdvertDto>>(this.jobAdvertDao.getJobAdvertDtosByPublishedDateTimeAndActiveTrue(),
+	public DataResult<List<JobAdvertGetDto>> getConfirmedJobAdvertDtosByPublishedDateTimeAndActiveTrue() {
+		return new SuccessDataResult<List<JobAdvertGetDto>>(this.jobAdvertDao.getConfirmedJobAdvertDtosByPublishedDateTimeAndActiveTrue(),
 				"Veri listelendi");
 	}
 	
 	@Override
-	public DataResult<List<JobAdvertDto>> getJobAdvertDtosByEmployerIdAndActiveTrue(int employerId) {
-		return new SuccessDataResult<List<JobAdvertDto>>(this.jobAdvertDao
-				.getJobAdvertDtosByEmployerIdAndActiveTrue(employerId), "Veri listelendi");
+	public DataResult<List<JobAdvertGetDto>> getConfirmedJobAdvertDtosByEmployerIdAndActiveTrue(int employerId) {
+		return new SuccessDataResult<List<JobAdvertGetDto>>(this.jobAdvertDao
+				.getConfirmedJobAdvertDtosByEmployerIdAndActiveTrue(employerId), "Veri listelendi");
+	}
+	
+	@Override
+	public DataResult<JobAdvertGetDto> getConfirmedJobAdvertDtoByIdAndActiveTrue(int jobAdvertId){
+		return new SuccessDataResult<JobAdvertGetDto>(this.jobAdvertDao
+				.getConfirmedJobAdvertDtoByIdAndActiveTrue(jobAdvertId), "Veri listelendi");
 	}
 	
 	@Override
@@ -78,33 +90,55 @@ public class JobAdvertManager implements JobAdvertService {
 	public Result add(JobAdvertAddDto jobAdvertAddDto) {
 
 		JobAdvert jobAdvert = new JobAdvert(jobAdvertAddDto.getCityId(), jobAdvertAddDto.getJobTitleId(),
-				jobAdvertAddDto.getEmployerId(), jobAdvertAddDto.getJobDefinition(), jobAdvertAddDto.getMinSalary(),
+				jobAdvertAddDto.getEmployerId(),jobAdvertAddDto.getJobTypeId(), jobAdvertAddDto.getJobStyleId(),
+				jobAdvertAddDto.getJobDefinition(), jobAdvertAddDto.getMinSalary(),
 				jobAdvertAddDto.getMaxSalary(), jobAdvertAddDto.getNumberOfOpenPositions(),
 				jobAdvertAddDto.getDeadLineForAppeal());
 		
 		this.jobAdvertDao.saveAndFlush(jobAdvert);
+		
+		SystemPersonnelConfirmOfJobAdvert systemPersonnelConfirmOfJobAdvert = new SystemPersonnelConfirmOfJobAdvert();
+		systemPersonnelConfirmOfJobAdvert.setDidConfirm(false);
+		systemPersonnelConfirmOfJobAdvert.setJobAdvertId(jobAdvert.getId());
+		
+		this.systemPersonnelConfirmOfJobAdvertService.add(systemPersonnelConfirmOfJobAdvert);
+		
 		Employer employer = this.employerService.get(jobAdvert.getEmployer().getId()).getData();
-		this.emailService.sendSimpleMessage("kenanatasoy@outlook.com", "Job Advert Addition Notice",
-				"İş ilanını eklediniz.");
-		return new SuccessResult(employer.getFirstName() + " başarıyla iş ilanını ekledi.");
+		
+		this.emailService.sendSimpleMessage(employer.getEmailAddress(), "Job Advert Publishing Req Notice",
+				"İş ilanınızın yayınlanması için önce sistem personelinin doğrulaması gerekmektedir."
+				+ " İş ilanınız sistem personelinin doğrulamasına gönderilmiştir.");
+		return new SuccessResult("İlanın yayınlanması için önce sistem personelinin doğrulaması gerekmektedir.");
 
-//		TODO: Buraya dinamik bir email adresi girilecek,
-//		statik email adresi değiştirilecek, statik email adresi test için girilmiştir.
+//		Note: Buraya test amaçlı dinamik bir email adresi yerine statik bir mail adresi 
+//		girilebilir. Nihai olarak dinamik email adresi girilmelidir.
+	}
+	
+	@Override
+	public Result add(JobAdvert jobAdvert) {
+		this.jobAdvertDao.saveAndFlush(jobAdvert);
+		return new SuccessResult();
 	}
 
 	@Override
-	public Result toggleJobAdActivePassive(int jobAdvertId) {
+	public Result toggleJobAdActivePassive(Integer jobAdvertId, boolean isActivated) {
+		
 		JobAdvert jobAdvert = this.jobAdvertDao.getOne(jobAdvertId);
 		
-//		isActive = jobAdvert.isActive() == isActive ? true : false;
+//		ternary operator example => jobAdvert.isActive() == isActive ? true : false;
 		
-		jobAdvert.setActive(!jobAdvert.isActive());
+		if (isActivated == jobAdvert.getActive()) {
+			return new ErrorResult("İş ilanı zaten " + (jobAdvert.getActive() == true ? "aktif" : "pasif") + ".");
+		}
+		
+		jobAdvert.setActive(isActivated);
 		this.jobAdvertDao.saveAndFlush(jobAdvert);
 		Employer employer = this.employerService.get(jobAdvert.getEmployer().getId()).getData();
 		this.emailService.sendSimpleMessage(employer.getEmailAddress(), "Job Advert Passive Notice",
-				"İş ilanının aktif-pasif olma durumunu değiştirdiniz.");
-		return new SuccessResult(employer.getFirstName() + " iş ilanının aktif-pasif olma durumunu değiştirdi."
-				+ jobAdvert.isActive());
+				jobAdvert.getId() + " numaralı " + jobAdvert.getJobTitle().getTitle() + 
+				" ilanını " + (isActivated == true ? "aktif" : "pasif") + "leştirdiniz.");
+		return new SuccessResult(employer.getFirstName() + 
+				", İş ilanını aktif-pasif olma durumunu değiştirdi.");
 		
 	}
 	
@@ -119,6 +153,7 @@ public class JobAdvertManager implements JobAdvertService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
 	
 	
 	

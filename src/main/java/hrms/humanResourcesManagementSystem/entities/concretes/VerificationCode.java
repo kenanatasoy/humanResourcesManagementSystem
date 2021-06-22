@@ -25,16 +25,16 @@ public class VerificationCode {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
-	private int id;
+	private Integer id;
 	
 	@Column(name = "code", unique = true)
 	private String code;
 	
 	@Column(name = "is_verified")
-	private boolean isVerified = false;
+	private Boolean isVerified = false;
 	
 	@Column(name = "user_id")
-	private int userId;
+	private Integer userId;
 	
 	@Column(name = "created_date_time")
 	private LocalDateTime createdDateTime = LocalDateTime.now();

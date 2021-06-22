@@ -38,8 +38,7 @@ public class JobSeekerCVManager implements JobSeekerCVService {
 	@Override
 	public Result add(JobSeekerCVAddDto jobSeekerCVAddDto) {
 		JobSeekerCV jobSeekerCV = new JobSeekerCV(jobSeekerCVAddDto.getJobSeekerId(),
-				jobSeekerCVAddDto.getGithubAddress(), jobSeekerCVAddDto.getLinkedInAddress(),
-				jobSeekerCVAddDto.getCoverLetter(), jobSeekerCVAddDto.isActive());
+				jobSeekerCVAddDto.getCoverLetter(), jobSeekerCVAddDto.getActive());
 		
 		this.jobSeekerCVDao.save(jobSeekerCV);
 		return new SuccessResult();

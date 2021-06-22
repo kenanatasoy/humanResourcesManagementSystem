@@ -26,7 +26,7 @@ public class EducationSchool {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
-	private int id;
+	private Integer id;
 	
 //	@Column(name = "city_id")
 //	private int cityId;
@@ -35,7 +35,7 @@ public class EducationSchool {
 	private String name;
 	
 	@Column(name = "is_active")
-	private boolean active;
+	private Boolean active;
 	
 	@ManyToOne()
 	@JoinColumn(name = "city_id")

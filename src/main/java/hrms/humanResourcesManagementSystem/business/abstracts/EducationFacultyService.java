@@ -8,7 +8,7 @@ import hrms.humanResourcesManagementSystem.entities.concretes.EducationFaculty;
 
 public interface EducationFacultyService {
 	DataResult<List<EducationFaculty>> getAll();
-	DataResult<List<EducationFaculty>> getAllByUniverstyIdAndActiveTrue(int schoolId);
+	DataResult<List<EducationFaculty>> getAllByUniversityIdAndActiveTrue(int schoolId);
 	DataResult<EducationFaculty> get(int id);
 	Result add (EducationFaculty educationFaculty);
 	Result update(EducationFaculty educationFaculty);

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,6 +19,7 @@ import hrms.humanResourcesManagementSystem.entities.dtos.JobSeekerCVAddDto;
 
 @RestController
 @RequestMapping("/api/jobseekercvs/")
+@CrossOrigin
 public class JobSeekerCVController {
 
 	@Autowired
@@ -38,7 +40,7 @@ public class JobSeekerCVController {
 	}
 	
 	@GetMapping("getByJobSeekerId")
-	public ResponseEntity<?> getByJobSeekerId(int jobSeekerId){
+	public ResponseEntity<?> getByJobSeekerId(Integer jobSeekerId){
 		
 		DataResult<List<JobSeekerCV>> dataResult = this.jobSeekerCVService.getByJobSeekerId(jobSeekerId);
 		
@@ -51,7 +53,7 @@ public class JobSeekerCVController {
 	}
 
 	@GetMapping("getbyid")
-	public ResponseEntity<?> get(int id) {
+	public ResponseEntity<?> get(Integer id) {
 		
 		DataResult<JobSeekerCV> dataResult = this.jobSeekerCVService.get(id);
 

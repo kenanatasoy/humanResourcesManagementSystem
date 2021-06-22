@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import hrms.humanResourcesManagementSystem.business.abstracts.EmailService;
 import hrms.humanResourcesManagementSystem.business.abstracts.SystemPersonnelService;
 import hrms.humanResourcesManagementSystem.core.utilities.results.DataResult;
 import hrms.humanResourcesManagementSystem.core.utilities.results.Result;
@@ -20,6 +21,9 @@ public class SystemPersonnelManager implements SystemPersonnelService {
 	@Autowired
 	private SystemPersonnelDao systemPersonnelDao;
 	
+	@Autowired
+	private EmailService emailLogger;
+	
 	
 	@Override
 	public DataResult<List<SystemPersonnel>> getAll() {
@@ -34,6 +38,9 @@ public class SystemPersonnelManager implements SystemPersonnelService {
 	@Override
 	public Result add(SystemPersonnel systemPersonnel) {
 		this.systemPersonnelDao.saveAndFlush(systemPersonnel);
+		this.emailLogger.sendSimpleMessage(systemPersonnel.getEmailAddress(), 
+				"System Personnel Registration Notice", 
+				"Sistem personeli olarak sisteme başarılı bir şekilde kaydoldunuz.");
 		return new SuccessResult();
 	}
 

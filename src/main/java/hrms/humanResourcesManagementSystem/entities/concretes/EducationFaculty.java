@@ -21,16 +21,16 @@ public class EducationFaculty {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
-	private int id;
+	private Integer id;
 	
 	@Column(name = "name")
 	private String name;
 	
 	@Column(name = "university_id")
-	private int universityId;
+	private Integer universityId;
 	
 	@Column(name = "is_active")
-	private boolean active;
+	private Boolean active;
 	
 	
 }

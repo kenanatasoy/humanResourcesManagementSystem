@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,6 +18,7 @@ import hrms.humanResourcesManagementSystem.entities.concretes.SystemPersonnel;
 
 @RestController
 @RequestMapping("/api/systempersonnels/")
+@CrossOrigin
 public class SystemPersonnelsController {
 
 	@Autowired
@@ -37,7 +39,7 @@ public class SystemPersonnelsController {
 	}
 
 	@GetMapping("getbyid")
-	public ResponseEntity<?> get(int id) {
+	public ResponseEntity<?> get(Integer id) {
 		
 		DataResult<SystemPersonnel> dataResult = this.systemPersonnelService.get(id);
 		
@@ -64,7 +66,7 @@ public class SystemPersonnelsController {
 	}
 
 	@PostMapping("update")
-	public ResponseEntity<?> update(SystemPersonnel systemPersonnel) {
+	public ResponseEntity<?> update(@RequestBody SystemPersonnel systemPersonnel) {
 		
 		Result result = this.systemPersonnelService.update(systemPersonnel);
 		
@@ -77,7 +79,7 @@ public class SystemPersonnelsController {
 	}
 	
 	@PostMapping("delete")
-	public ResponseEntity<?> delete(int systemPersonnelId) {
+	public ResponseEntity<?> delete(Integer systemPersonnelId) {
 		
 		Result result = this.systemPersonnelService.delete(systemPersonnelId);
 		

@@ -9,11 +9,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class JobSeekerCVAddDto {
 	
-	private int jobSeekerId;
-	private String githubAddress;
-	private String linkedInAddress;
+	private Integer jobSeekerId;
 	private String coverLetter;
-	private boolean active;
+	private Boolean active;
 	
 }
 

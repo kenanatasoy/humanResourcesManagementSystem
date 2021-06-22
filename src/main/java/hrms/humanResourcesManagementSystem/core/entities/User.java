@@ -29,7 +29,7 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
-	private int id;
+	private Integer id;
 
 	@NotNull
 	@NotBlank
@@ -40,6 +40,9 @@ public class User {
 	@NotBlank
 	@Column(name = "last_name")
 	private String lastName;
+	
+	@Column(name = "gender_id")
+	private Integer genderId;
 	
 	@NotNull
 	@NotBlank

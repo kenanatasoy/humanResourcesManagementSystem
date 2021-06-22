@@ -31,7 +31,7 @@ public class JobSeekerCVEducation {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
-	private int id;
+	private Integer id;
 	
 //	@Column(name = "job_seeker_cv_id")
 //	private int jobSekeerCVId;
@@ -75,7 +75,7 @@ public class JobSeekerCVEducation {
 	
 //	@JsonIgnore
 	@JsonIgnoreProperties({"jobSeekerCVEducations", "githubAddress", "linkedInAddress",
-		"coverLetter", "createdDateTime", "lastUpdatedDateTime", "active", "jobSeekerCVSkills",
+		"coverLetter", "active", "jobSeekerCVSkills",
 		"jobSeekerCVLanguages", "jobSeekerCVExperiences", "jobSeekerCVImage"})
 	@ManyToOne()
 	@JoinColumn(name = "job_seeker_cv_id")
@@ -98,9 +98,9 @@ public class JobSeekerCVEducation {
 	private EducationStudyField educationStudyField;
 
 	
-	public JobSeekerCVEducation(int degreeId, int schoolId, int facultyId, 
-			int studyFieldId, LocalDate startingDate, LocalDate graduationDate,
-			int jobSeekerCVId) {
+	public JobSeekerCVEducation(Integer degreeId, Integer schoolId, Integer facultyId, 
+			Integer studyFieldId, LocalDate startingDate, LocalDate graduationDate,
+			Integer jobSeekerCVId) {
 		
 		this.educationDegree = new EducationDegree();
 		this.educationDegree.setId(degreeId);

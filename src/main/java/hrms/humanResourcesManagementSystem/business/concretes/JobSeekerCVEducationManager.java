@@ -51,6 +51,12 @@ public class JobSeekerCVEducationManager implements JobSeekerCVEducationService 
 	}
 
 	@Override
+	public Result add(JobSeekerCVEducation jobSeekerCVEducation) {
+		this.jobSeekerCVEducationDao.save(jobSeekerCVEducation);
+		return new SuccessResult();
+	}
+	
+	@Override
 	public Result update(JobSeekerCVEducation jobSeekerCVEducation) {
 		// TODO Auto-generated method stub
 		return null;

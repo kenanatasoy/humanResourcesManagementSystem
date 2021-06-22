@@ -9,5 +9,6 @@ import hrms.humanResourcesManagementSystem.entities.concretes.SystemPersonnelCon
 public interface SystemPersonnelConfirmOfEmployerService {
 	DataResult<List<SystemPersonnelConfirmOfEmployer>> getAll();
 	DataResult<SystemPersonnelConfirmOfEmployer> get(int id);
+	DataResult<SystemPersonnelConfirmOfEmployer> findByEmployerId(int employerId);
 	Result add(SystemPersonnelConfirmOfEmployer systemPersonnelConfirmOfEmployer);
 }

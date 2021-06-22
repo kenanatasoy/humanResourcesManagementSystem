@@ -9,9 +9,9 @@ import hrms.humanResourcesManagementSystem.entities.concretes.JobTitle;
 public interface JobTitleService {
 	
 	DataResult<List<JobTitle>> getAll();
-	DataResult<JobTitle> get(int id);
+	DataResult<JobTitle> get(Integer id);
 	Result add(JobTitle jobTitle);
-	Result update(JobTitle jobTitle);
-	Result delete(JobTitle jobTitle);
+//	Result update(JobTitle jobTitle);
+//	Result delete(JobTitle jobTitle);
 
 }

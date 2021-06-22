@@ -18,5 +18,6 @@ import lombok.NoArgsConstructor;
 public class SystemPersonnelConfirmOfEmployer extends SystemPersonnelConfirm{
 	
 	@Column(name = "employer_id")
-	private int employerId;
+	private Integer employerId;
+	
 }

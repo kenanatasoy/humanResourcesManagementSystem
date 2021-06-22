@@ -12,6 +12,7 @@ import hrms.humanResourcesManagementSystem.core.utilities.results.SuccessDataRes
 import hrms.humanResourcesManagementSystem.core.utilities.results.SuccessResult;
 import hrms.humanResourcesManagementSystem.dataAccess.abstracts.JobSeekerCVLanguageDao;
 import hrms.humanResourcesManagementSystem.entities.concretes.JobSeekerCVLanguage;
+import hrms.humanResourcesManagementSystem.entities.dtos.JobSeekerCVLanguageGetDto;
 
 @Service
 public class JobSeekerCVLanguageManager implements JobSeekerCVLanguageService{
@@ -20,14 +21,26 @@ public class JobSeekerCVLanguageManager implements JobSeekerCVLanguageService{
 	private JobSeekerCVLanguageDao jobSeekerCVLanguageDao;
 	
 	
+//	@Override
+//	public DataResult<List<JobSeekerCVLanguage>> getAll() {
+//		return new SuccessDataResult<List<JobSeekerCVLanguage>>(this.jobSeekerCVLanguageDao.findAll());
+//	}
+
+//	@Override
+//	public DataResult<JobSeekerCVLanguage> get(Integer id) {
+//		return new SuccessDataResult<JobSeekerCVLanguage>(this.jobSeekerCVLanguageDao.getOne(id));
+//	}
+	
 	@Override
-	public DataResult<List<JobSeekerCVLanguage>> getAll() {
-		return new SuccessDataResult<List<JobSeekerCVLanguage>>(this.jobSeekerCVLanguageDao.findAll());
+	public DataResult<List<JobSeekerCVLanguageGetDto>> getJobSeekerCVLanguagesGetDtos() {
+		return new SuccessDataResult<List<JobSeekerCVLanguageGetDto>>
+		(this.jobSeekerCVLanguageDao.getJobSeekerCVLanguagesGetDtos());
 	}
 
 	@Override
-	public DataResult<JobSeekerCVLanguage> get(int id) {
-		return new SuccessDataResult<JobSeekerCVLanguage>(this.jobSeekerCVLanguageDao.getOne(id));
+	public DataResult<JobSeekerCVLanguageGetDto> getJobSeekerCVLanguagesGetDtoById(Integer jobSeekerCVLanguageId) {
+		return new SuccessDataResult<JobSeekerCVLanguageGetDto>
+		(this.jobSeekerCVLanguageDao.getJobSeekerCVLanguagesGetDtoById(jobSeekerCVLanguageId));
 	}
 
 	@Override
@@ -43,9 +56,9 @@ public class JobSeekerCVLanguageManager implements JobSeekerCVLanguageService{
 	}
 
 	@Override
-	public Result delete(JobSeekerCVLanguage jobSeekerCVLanguage) {
-		// TODO Auto-generated method stub
-		return null;
+	public Result deleteById(Integer jobSeekerCVLanguageId) {
+		this.jobSeekerCVLanguageDao.deleteById(jobSeekerCVLanguageId);
+		return new SuccessResult();
 	}
 
 }

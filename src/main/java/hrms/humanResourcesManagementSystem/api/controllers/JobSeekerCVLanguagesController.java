@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,19 +16,22 @@ import hrms.humanResourcesManagementSystem.business.abstracts.JobSeekerCVLanguag
 import hrms.humanResourcesManagementSystem.core.utilities.results.DataResult;
 import hrms.humanResourcesManagementSystem.core.utilities.results.Result;
 import hrms.humanResourcesManagementSystem.entities.concretes.JobSeekerCVLanguage;
+import hrms.humanResourcesManagementSystem.entities.dtos.JobSeekerCVLanguageGetDto;
 
 @RestController
 @RequestMapping("/api/jobseekercvlanguages/")
+@CrossOrigin
 public class JobSeekerCVLanguagesController {
 
 	@Autowired
 	private JobSeekerCVLanguageService jobSeekerCVLanguageService;
 	
 	
-	@GetMapping("getall")
-	public ResponseEntity<?> getAll(){
+	@GetMapping("getJobSeekerCVLanguagesGetDtos")
+	public ResponseEntity<?> getJobSeekerCVLanguagesGetDtos(){
 		
-		DataResult<List<JobSeekerCVLanguage>> dataResult = this.jobSeekerCVLanguageService.getAll();
+		DataResult<List<JobSeekerCVLanguageGetDto>> dataResult = 
+				this.jobSeekerCVLanguageService.getJobSeekerCVLanguagesGetDtos();
 		
 		if (dataResult.isSuccess()) {
 			return ResponseEntity.ok(dataResult);
@@ -36,10 +41,11 @@ public class JobSeekerCVLanguagesController {
 		}
 	}
 	
-	@GetMapping("getbyid")
-	public ResponseEntity<?> get(int id) {
+	@GetMapping("getJobSeekerCVLanguagesGetDtoById")
+	public ResponseEntity<?> getJobSeekerCVLanguagesGetDtoById(Integer id) {
 		
-		DataResult<JobSeekerCVLanguage> dataResult = this.jobSeekerCVLanguageService.get(id);
+		DataResult<JobSeekerCVLanguageGetDto> dataResult = 
+				this.jobSeekerCVLanguageService.getJobSeekerCVLanguagesGetDtoById(id);
 		
 		if (dataResult.isSuccess()) {
 			return ResponseEntity.ok(dataResult);
@@ -63,5 +69,20 @@ public class JobSeekerCVLanguagesController {
 		}
 		
 	}
+	
+	@DeleteMapping("deletebyid")
+	public ResponseEntity<?> deleteById(Integer jobSeekerCVLanguageId){
+		
+		Result result = this.jobSeekerCVLanguageService.deleteById(jobSeekerCVLanguageId);
+		
+		if (result.isSuccess()) {
+			return ResponseEntity.ok(result);
+		}
+		else {
+			return ResponseEntity.badRequest().body(result);
+		}
+		
+	}
+	
 	
 }

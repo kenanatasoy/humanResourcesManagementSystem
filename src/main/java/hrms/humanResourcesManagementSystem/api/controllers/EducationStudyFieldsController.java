@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,6 +15,7 @@ import hrms.humanResourcesManagementSystem.entities.concretes.EducationStudyFiel
 
 @RestController
 @RequestMapping("/api/educationstudyfields/")
+@CrossOrigin
 public class EducationStudyFieldsController {
 
 	@Autowired
@@ -35,7 +37,7 @@ public class EducationStudyFieldsController {
 	}
 	
 	@GetMapping("getByFacultyIdAndActiveTrue")
-	public ResponseEntity<?> getByFacultyIdAndActiveTrue(int facultyId) {
+	public ResponseEntity<?> getByFacultyIdAndActiveTrue(Integer facultyId) {
 		
 		DataResult<List<EducationStudyField>> dataResult = this.educationStudyFieldService
 				.getByFacultyIdAndActiveTrue(facultyId);
@@ -50,7 +52,7 @@ public class EducationStudyFieldsController {
 	}
 	
 	@GetMapping("getbyid")
-	public ResponseEntity<?> get(int id) {
+	public ResponseEntity<?> get(Integer id) {
 		
 		DataResult<EducationStudyField> dataResult = this.educationStudyFieldService.get(id);
 		

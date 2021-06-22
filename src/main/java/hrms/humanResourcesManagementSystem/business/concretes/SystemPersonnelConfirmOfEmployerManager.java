@@ -7,7 +7,9 @@ import org.springframework.stereotype.Service;
 
 import hrms.humanResourcesManagementSystem.business.abstracts.SystemPersonnelConfirmOfEmployerService;
 import hrms.humanResourcesManagementSystem.core.utilities.results.DataResult;
+import hrms.humanResourcesManagementSystem.core.utilities.results.ErrorDataResult;
 import hrms.humanResourcesManagementSystem.core.utilities.results.Result;
+import hrms.humanResourcesManagementSystem.core.utilities.results.SuccessDataResult;
 import hrms.humanResourcesManagementSystem.core.utilities.results.SuccessResult;
 import hrms.humanResourcesManagementSystem.dataAccess.abstracts.SystemPersonnelConfirmOfEmployerDao;
 import hrms.humanResourcesManagementSystem.entities.concretes.SystemPersonnelConfirmOfEmployer;
@@ -29,11 +31,24 @@ public class SystemPersonnelConfirmOfEmployerManager implements SystemPersonnelC
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	@Override
+	public DataResult<SystemPersonnelConfirmOfEmployer> findByEmployerId(int employerId) {
+		SystemPersonnelConfirmOfEmployer systemPersonnelConfirmOfEmployer = 
+				this.systemPersonnelConfirmOfEmployerDao.findByEmployerId(employerId).orElse(null);
+		if (systemPersonnelConfirmOfEmployer == null) {
+			return new ErrorDataResult<SystemPersonnelConfirmOfEmployer>();
+		}
+		
+		return new SuccessDataResult<SystemPersonnelConfirmOfEmployer>(systemPersonnelConfirmOfEmployer);
+	}
 
 	@Override
 	public Result add(SystemPersonnelConfirmOfEmployer systemPersonnelConfirmOfEmployer) {
 		this.systemPersonnelConfirmOfEmployerDao.saveAndFlush(systemPersonnelConfirmOfEmployer);
 		return new SuccessResult();
 	}
+
+	
 
 }

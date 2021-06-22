@@ -13,14 +13,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class JobSeekerCVEducationAddDto {
 
-	private int degreeId;
-	private int schoolId;
-	private int facultyId;
-	private int studyFieldId;
+	private Integer degreeId;
+	private Integer schoolId;
+	private Integer facultyId;
+	private Integer studyFieldId;
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private LocalDate startingDate;
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private LocalDate graduationDate;
-	private int jobSeekerCVId;
+	private Integer jobSeekerCVId;
 
 }

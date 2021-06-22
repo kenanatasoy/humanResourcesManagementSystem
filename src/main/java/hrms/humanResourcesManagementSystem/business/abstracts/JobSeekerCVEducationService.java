@@ -13,6 +13,7 @@ public interface JobSeekerCVEducationService {
 	DataResult<List<JobSeekerCVEducation>> getAllByJobSeekerCVIdOrderByGraduationDateDesc(int jobSeekerCVId);
 	DataResult<JobSeekerCVEducation> get(int id);
 	Result add(JobSeekerCVEducationAddDto jobSeekerCVEducationAddDto);
+	Result add(JobSeekerCVEducation jobSeekerCVEducation);
 	Result update(JobSeekerCVEducation jobSeekerCVEducation);
 	Result delete(JobSeekerCVEducation jobSeekerCVEducation);
 

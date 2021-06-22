@@ -27,7 +27,7 @@ public class JobSeekerCVSkill {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
-	private int id;
+	private Integer id;
 	
 //	@Column(name = "job_seeker_CV_id")
 //	private int jobSeekerCVid;

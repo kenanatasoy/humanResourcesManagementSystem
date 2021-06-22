@@ -27,24 +27,25 @@ public class JobTitleManager implements JobTitleService {
 	}
 
 	@Override
-	public DataResult<JobTitle> get(int id) {
-		return null;
+	public DataResult<JobTitle> get(Integer id) {
+		return new SuccessDataResult<JobTitle>(this.jobTitleDao.getOne(id));
 	}
 
 	@Override
 	public Result add(JobTitle jobTitle) {
+		this.jobTitleDao.saveAndFlush(jobTitle);
 		return new SuccessResult();
 	}
 
-	@Override
-	public Result update(JobTitle jobTitle) {
-		return new SuccessResult();
-	}
-
-	@Override
-	public Result delete(JobTitle jobTitle) {
-		return new SuccessResult();
-	}
+//	@Override
+//	public Result update(JobTitle jobTitle) {
+//		return new SuccessResult();
+//	}
+//
+//	@Override
+//	public Result delete(JobTitle jobTitle) {
+//		return new SuccessResult();
+//	}
 
 	
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,27 +19,28 @@ import hrms.humanResourcesManagementSystem.entities.dtos.JobSeekerCVEducationAdd
 
 @RestController
 @RequestMapping("/api/jobseekercveducations/")
+@CrossOrigin
 public class JobSeekerCVEducationController {
 
 	@Autowired
 	private JobSeekerCVEducationService jobSeekerCVEducationService;
 
 	
-	@GetMapping("getall")
-	public ResponseEntity<?> getAll() {
-
-		DataResult<List<JobSeekerCVEducation>> dataResult = this.jobSeekerCVEducationService.getAll();
-
-		if (dataResult.isSuccess()) {
-			return ResponseEntity.ok(dataResult);
-		} else {
-			return ResponseEntity.badRequest().body(dataResult);
-		}
-
-	}
+//	@GetMapping("getall")
+//	public ResponseEntity<?> getAll() {
+//
+//		DataResult<List<JobSeekerCVEducation>> dataResult = this.jobSeekerCVEducationService.getAll();
+//
+//		if (dataResult.isSuccess()) {
+//			return ResponseEntity.ok(dataResult);
+//		} else {
+//			return ResponseEntity.badRequest().body(dataResult);
+//		}
+//
+//	}
 
 	@GetMapping("getAllByJobSeekerCVIdOrderByGraduationDateDesc")
-	public ResponseEntity<?> findAllByJobSeekerCVIdOrderByGraduationDateDesc(int jobSeekerCVId) {
+	public ResponseEntity<?> findAllByJobSeekerCVIdOrderByGraduationDateDesc(Integer jobSeekerCVId) {
 
 		DataResult<List<JobSeekerCVEducation>> dataResult = this.jobSeekerCVEducationService
 				.getAllByJobSeekerCVIdOrderByGraduationDateDesc(jobSeekerCVId);
@@ -53,7 +55,7 @@ public class JobSeekerCVEducationController {
 	}
 
 	@GetMapping("getbyid")
-	public ResponseEntity<?> get(int id) {
+	public ResponseEntity<?> get(Integer id) {
 
 		DataResult<JobSeekerCVEducation> dataResult = this.jobSeekerCVEducationService.get(id);
 
@@ -69,6 +71,19 @@ public class JobSeekerCVEducationController {
 	public ResponseEntity<?> add(@RequestBody JobSeekerCVEducationAddDto jobSeekerCVEducationAddDto) {
 
 		Result result = this.jobSeekerCVEducationService.add(jobSeekerCVEducationAddDto);
+
+		if (result.isSuccess()) {
+			return ResponseEntity.ok(result);
+		} else {
+			return ResponseEntity.badRequest().body(result);
+		}
+
+	}
+	
+	@PostMapping("addRaw")
+	public ResponseEntity<?> addRaw(@RequestBody JobSeekerCVEducation jobSeekerCVEducation) {
+
+		Result result = this.jobSeekerCVEducationService.add(jobSeekerCVEducation);
 
 		if (result.isSuccess()) {
 			return ResponseEntity.ok(result);

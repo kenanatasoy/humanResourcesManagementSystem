@@ -28,16 +28,16 @@ public class JobSeekerCVExperience {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
-	private int id;
+	private Integer id;
 	
 //	@Column(name = "job_seeker_CV_id")
 //	private int jobSeekerCVId;
 	
 	@Column(name = "job_title_id")
-	private int jobTitleId;
+	private Integer jobTitleId;
 	
 	@Column(name = "city_id")
-	private int cityId;
+	private Integer cityId;
 	
 	@Column(name = "institution_name")
 	private String institutionName;
@@ -78,7 +78,7 @@ public class JobSeekerCVExperience {
 //	@JoinColumn(name = "job_title_id")
 //	private JobTitle jobTitle;
 	
-	public JobSeekerCVExperience(int jobSeekerCVId, int jobTitleId,  int cityId,
+	public JobSeekerCVExperience(Integer jobSeekerCVId, Integer jobTitleId,  Integer cityId,
 			String institutionName, LocalDate startingDate, LocalDate endingDate) {
 		
 		this.jobSeekerCV = new JobSeekerCV();

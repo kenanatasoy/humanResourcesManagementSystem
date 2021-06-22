@@ -11,9 +11,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class JobSeekerCVExperienceAddDto {
 
-	private int jobSeekerCVId;
-	private int jobTitleId;
-	private int cityId;
+	private Integer jobSeekerCVId;
+	private Integer jobTitleId;
+	private Integer cityId;
 	private String institutionName;
 	private LocalDate startingDate;
 	private LocalDate endingDate;

@@ -26,7 +26,7 @@ public class EducationFacultyManager implements EducationFacultyService {
 	}
 	
 	@Override
-	public DataResult<List<EducationFaculty>> getAllByUniverstyIdAndActiveTrue(int schoolId){
+	public DataResult<List<EducationFaculty>> getAllByUniversityIdAndActiveTrue(int schoolId){
 		return new SuccessDataResult<List<EducationFaculty>>(this.educationFacultyDao
 				.getByUniversityIdAndActiveTrue(schoolId));
 	}
